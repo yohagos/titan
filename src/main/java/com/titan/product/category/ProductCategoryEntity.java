@@ -21,5 +21,8 @@ public class ProductCategoryEntity {
     @GeneratedValue
     private Long id;
 
-    private String name;
+    private String categoryName;
+    private Double measurement;
+    private String unit;
+
 }
