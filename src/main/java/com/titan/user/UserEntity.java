@@ -31,7 +31,9 @@ public class UserEntity implements UserDetails, Serializable {
     private String lastname;
     private String email;
     private String password;
+    private Integer pin;
     private LocalDateTime createdAt;
+
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
@@ -54,22 +56,22 @@ public class UserEntity implements UserDetails, Serializable {
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
     @Override
