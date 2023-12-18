@@ -1,6 +1,5 @@
 package com.titan.table;
 
-import com.titan.product.ProductEntity;
 import com.titan.table.request.TableAddProductRequest;
 import com.titan.table.request.TableRequest;
 import com.titan.table.response.TableAddProductResponse;
@@ -64,7 +63,6 @@ public class TableService {
 
     public TableCloseResponse closeTable(Long id) {
         var table = tableRepository.findById(id).orElseThrow();
-        var responseInformation = table;
         if (table.getOpenCosts() <= 0.0)
             throw new IllegalArgumentException(
                     "Current costs of table is 0.0 or it is not occupied. " +
@@ -76,10 +74,10 @@ public class TableService {
         table.setNumberOfPeople(0);
 
         return new TableCloseResponse(
-                responseInformation.getId(),
-                responseInformation.getOpenCosts(),
-                responseInformation.getNumberOfPeople(),
-                responseInformation.getProducts()
+                table.getId(),
+                table.getOpenCosts(),
+                table.getNumberOfPeople(),
+                table.getProducts()
         );
     }
 
