@@ -25,7 +25,7 @@ public class ProductEntity implements Serializable {
     private String name;
     private Double price;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private ProductCategoryEntity category;
 
@@ -37,6 +37,12 @@ public class ProductEntity implements Serializable {
         this.name = name;
         this.price = price;
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Product=[id=%d, name=%s, price=%d]",
+                getId(), getName(), getPrice());
     }
 
 }
