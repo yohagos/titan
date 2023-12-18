@@ -21,5 +21,14 @@ public class ProductCategoryEntity {
     @GeneratedValue
     private Long id;
 
-    private String name;
+    private String categoryName;
+    private Double measurement;
+    private String unit;
+
+    ProductCategoryEntity(String name, Double measure, String unit) {
+        categoryName = name;
+        measurement = measure;
+        this.unit = unit;
+    }
+
 }

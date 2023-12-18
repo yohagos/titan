@@ -29,4 +29,14 @@ public class ProductEntity implements Serializable {
     @JoinColumn(name = "category_id")
     private ProductCategoryEntity category;
 
+    public ProductEntity(
+            String name,
+            Double price,
+            ProductCategoryEntity category
+    ) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+    }
+
 }
