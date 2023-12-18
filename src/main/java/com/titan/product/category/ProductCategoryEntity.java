@@ -25,4 +25,10 @@ public class ProductCategoryEntity {
     private Double measurement;
     private String unit;
 
+    ProductCategoryEntity(String name, Double measure, String unit) {
+        categoryName = name;
+        measurement = measure;
+        this.unit = unit;
+    }
+
 }
