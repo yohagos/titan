@@ -41,8 +41,8 @@ public class ProductEntity implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("Product=[id=%d, name=%s, price=%d]",
-                getId(), getName(), getPrice());
+        return String.format("Product=[id=%d, name=%s, price=%s]",
+                getId(), getName(), getPrice().toString());
     }
 
 }

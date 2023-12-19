@@ -108,7 +108,8 @@ public class Runner {
 
             log.info(userRepository.findAll().toString());
             log.info(tableRepository.findAll().toString());
-            log.info(tableRepository.findAll().toString());
+            log.info(productRepository.findAll().toString());
+            log.info(categoryRepository.findAll().toString());
         };
     }
 }
