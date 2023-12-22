@@ -102,7 +102,17 @@ public class Runner {
                             new ProductEntity(7L, "Soup", 5.6D, categoryStarter),
                             new ProductEntity(8L, "Ramen", 12.5D, categoryLunch),
                             new ProductEntity(9L, "Rib Eye", 17.0D, categoryLunch),
-                            new ProductEntity(10L, "Penne", 10.4D, categoryLunch)
+                            new ProductEntity(10L, "Penne", 10.4D, categoryLunch),
+                            new ProductEntity(11L, "Yuzu Lemonade", 4.2D, categoryDrink),
+                            new ProductEntity(12L, "Basil Lemonade", 4.2D, categoryDrink),
+                            new ProductEntity(13L, "Mai Tai", 13.0D, categoryCocktail),
+                            new ProductEntity(14L, "Martini", 13.0D, categoryCocktail),
+                            new ProductEntity(15L, "Negroni", 11.0D, categoryCocktail),
+                            new ProductEntity(16L, "FranceSalad", 6.2D, categoryStarter),
+                            new ProductEntity(17L, "Tomato Soup", 5.6D, categoryStarter),
+                            new ProductEntity(18L, "Udon", 12.5D, categoryLunch),
+                            new ProductEntity(19L, "Chicken", 17.0D, categoryLunch),
+                            new ProductEntity(20L, "Spaghetti", 10.4D, categoryLunch)
                     )
             );
 
