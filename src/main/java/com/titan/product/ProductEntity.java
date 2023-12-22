@@ -26,7 +26,6 @@ public class ProductEntity implements Serializable {
     private Double price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
     private ProductCategoryEntity category;
 
     public ProductEntity(
