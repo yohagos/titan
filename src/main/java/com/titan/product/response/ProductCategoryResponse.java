@@ -15,6 +15,6 @@ public class ProductCategoryResponse {
 
     private Long id;
     private String name;
-    private Double measurement;
+    private String measurement;
     private String unit;
 }

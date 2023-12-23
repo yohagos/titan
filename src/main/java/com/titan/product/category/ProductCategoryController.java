@@ -31,6 +31,7 @@ public class ProductCategoryController {
     public ResponseEntity<ProductCategoryResponse> addCategory(
             @RequestBody ProductCategoryRequest request
     ) {
+        log.info(request.toString());
         return ResponseEntity.ok(categoryService.addProductCategory(request));
     }
 

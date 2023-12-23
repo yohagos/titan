@@ -24,18 +24,16 @@ public class ProductCategoryService {
     }
 
     public ProductCategoryResponse addProductCategory(ProductCategoryRequest request) {
-        if (request.getCategoryName() == null || request.getCategoryName().isEmpty()) {
+        log.info(request.toString());
+        if (request.getCategoryName() == null || request.getCategoryName().isEmpty() || request.getColor().length() < 1) {
             throw new IllegalArgumentException("Category name is null or empty, cannot be added");
         }
-        if (request.getUnit() == null || request.getUnit().isEmpty()) {
+        if ((request.getUnit() == null || request.getUnit().isEmpty()) && (request.getMeasurement() != null || request.getMeasurement().isEmpty())) {
             throw new IllegalArgumentException("Category unit is null or empty, cannot be added");
-        }
-        if (request.getMeasurement() > 0.0) {
-            throw new IllegalArgumentException("Category unit is 0, cannot be added");
         }
 
         var category = categoryRepository.save(
-                new ProductCategoryEntity(request.getCategoryName(), request.getMeasurement(), request.getUnit())
+                new ProductCategoryEntity(request.getCategoryName(), request.getMeasurement(), request.getUnit(), request.getColor())
         );
 
         return new ProductCategoryResponse(
@@ -56,7 +54,7 @@ public class ProductCategoryService {
                         .filter(unit -> !unit.isEmpty() || !unit.contentEquals(category.getUnit()))
                                 .ifPresent(category::setUnit);
         Optional.ofNullable(request.getMeasurement())
-                        .filter(measure -> !measure.isInfinite())
+                        .filter(measure -> !measure.isEmpty() || !measure.contentEquals(category.getMeasurement()))
                                 .ifPresent(category::setMeasurement);
         categoryRepository.save(category);
         return new ProductCategoryResponse(

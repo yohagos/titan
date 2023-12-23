@@ -73,16 +73,16 @@ public class Runner {
 
             categoryRepository.saveAll(
                     List.of(
-                            new ProductCategoryEntity(1L, "Drink", 0.5, CategoryUnit.ML.name()),
-                            new ProductCategoryEntity(2L, "Cocktail", 0.3, CategoryUnit.ML.name()),
-                            new ProductCategoryEntity(3L, "Drink", 0.2, CategoryUnit.ML.name()),
-                            new ProductCategoryEntity(4L, "Drink", 0.4, CategoryUnit.ML.name()),
-                            new ProductCategoryEntity(5L, "Starter", 500.0, CategoryUnit.MG.name()),
-                            new ProductCategoryEntity(6L, "Lunch", 800.0, CategoryUnit.G.name()),
-                            new ProductCategoryEntity(7L, "Brunch", 400.0, CategoryUnit.G.name()),
-                            new ProductCategoryEntity(8L, "Main", 600.0, CategoryUnit.G.name()),
-                            new ProductCategoryEntity(9L, "Dessert", 300.0, CategoryUnit.G.name()),
-                            new ProductCategoryEntity(10L, "Dessert", 350.0, CategoryUnit.G.name())
+                            new ProductCategoryEntity(1L, "Drink", "0.5", CategoryUnit.ML.name(), "#86d3a0"),
+                            new ProductCategoryEntity(2L, "Cocktail", "0.3", CategoryUnit.ML.name(), "#a2a2d0"),
+                            new ProductCategoryEntity(3L, "Drink", "0.2", CategoryUnit.ML.name(), "#86d3a0"),
+                            new ProductCategoryEntity(4L, "Drink", "0.4", CategoryUnit.ML.name(), "#86d3a0"),
+                            new ProductCategoryEntity(5L, "Starter", "500.0", CategoryUnit.MG.name(), "#f4d9cc"),
+                            new ProductCategoryEntity(6L, "Lunch", "800.0", CategoryUnit.G.name(), "#f6c19c"),
+                            new ProductCategoryEntity(7L, "Brunch", "400.0", CategoryUnit.G.name(), "#f59794"),
+                            new ProductCategoryEntity(8L, "Main", "600.0", CategoryUnit.G.name(), "#a3c1ad"),
+                            new ProductCategoryEntity(9L, "Dessert", "300.0", CategoryUnit.G.name(), "#f5cc7f"),
+                            new ProductCategoryEntity(10L, "Dessert", "350.0", CategoryUnit.G.name(), "#f5cc7f")
                     )
             );
 
