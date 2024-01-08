@@ -112,6 +112,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>titanApp</finalName>
 	</build>
 
 </project>

@@ -1,12 +1,30 @@
 version: '3.8'
 
 services:
-  db:
+  database:
     image: postgres
-    container_name: titan
+    restart: unless-stopped
     ports:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: titan
       POSTGRES_DB: titan
       POSTGRES_USER: root
+  app:
+    depends_on:
+      - database
+    image: 'titan:latest'
+    build: /app
+    restart: on-failure
+    ports:
+      - '9000:9000'
+
+    environment:
+      SPRING_APPLICATION_JSON: '{
+        "spring.datasource.url" : "jdbc:postgresql://localhost:5432/titan",
+        "spring.datasource.username" : "root",
+        "spring.datasource.password" : "titan",
+        "spring.jpa.properties.hibernate.dialect" : "org.hibernate.dialect.PostgreSQLDialect",
+        "spring.jpa.hibernate.ddl-auto" : "create-drop"
+      }'
+
