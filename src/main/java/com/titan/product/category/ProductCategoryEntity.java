@@ -22,11 +22,11 @@ public class ProductCategoryEntity {
     private Long id;
 
     private String categoryName;
-    private String measurement;
+    private double measurement;
     private String unit;
     private String color;
 
-    ProductCategoryEntity(String name, String measure, String unit, String color) {
+    ProductCategoryEntity(String name, double measure, String unit, String color) {
         categoryName = name;
         measurement = measure;
         this.unit = unit;

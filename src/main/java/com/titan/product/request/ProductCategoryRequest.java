@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class ProductCategoryRequest {
 
     private String categoryName;
-    private String measurement;
+    private double measurement;
     private String unit;
     private String color;
 }
