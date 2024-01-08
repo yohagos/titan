@@ -3,7 +3,7 @@ package com.titan.product;
 import com.titan.product.category.ProductCategoryRepository;
 import com.titan.product.request.ProductAddRequest;
 import com.titan.product.response.ProductResponse;
-import com.titan.user.request.ProductUpdateRequest;
+import com.titan.product.request.ProductUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,6 +42,7 @@ public class ProductService {
 
     public ProductResponse updateProduct(ProductUpdateRequest request) {
         var product = productRepository.findById(request.getId()).orElseThrow();
+        var category = categoryRepository.findById(request.getCategoryId()).orElseThrow();
         Optional.ofNullable(request.getName())
                 .filter(
                         name -> !name.isEmpty() || !name.contentEquals(product.getName())
@@ -50,7 +51,10 @@ public class ProductService {
                 .filter(
                         price -> !price.isNaN() || price != product.getPrice()
                 ).ifPresent(product::setPrice);
-        Optional.ofNullable(request.getCategory())
+        Optional.of(category)
+                .filter(
+                        cat -> false
+                )
                 .ifPresent(product::setCategory);
 
         productRepository.save(product);

@@ -1,11 +1,14 @@
 package com.titan.table;
 
-import com.titan.table.request.TableAddProductRequest;
+import com.titan.product.ProductEntity;
+import com.titan.product.ProductRepository;
 import com.titan.table.request.TableRequest;
 import com.titan.table.response.TableAddProductResponse;
 import com.titan.table.response.TableCloseResponse;
 import com.titan.table.response.TableResponse;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,6 +20,9 @@ import java.util.Optional;
 public class TableService {
 
     private final TableRepository tableRepository;
+    private final ProductRepository productRepository;
+
+    private static final Logger log = LoggerFactory.getLogger(TableService.class);
 
     public List<TableEntity> getTableList() {
         return tableRepository.findAll();
@@ -26,8 +32,10 @@ public class TableService {
         var table = tableRepository.findTableByTableNumber(request.getTableNumber());
         if (table.isPresent())
             throw new IllegalArgumentException("Table with Number " +  request.getTableNumber() + " already exists");
+        if (request.getPositionX() <= 0 || request.getPositionY() <= 0)
+            throw new IllegalArgumentException("Positions cannot be negative: {X: " + request.getPositionX() + ", Y: " + request.getPositionY() + "}");
         var addedTable = tableRepository.save(
-                new TableEntity(request.getTableNumber(), request.getNumberOfPeople())
+                new TableEntity(request.getTableNumber(), request.getNumberOfPeople(), request.getPositionX(), request.getPositionY())
         );
         return new TableResponse(
                 addedTable.getId(), addedTable.getTableNumber(), addedTable.getNumberOfPeople()
@@ -86,20 +94,32 @@ public class TableService {
         tableRepository.deleteById(table.getId());
     }
 
-    public TableAddProductResponse addProductToTable(TableAddProductRequest request) {
-        var table = tableRepository.findById(request.getId()).orElseThrow();
-        request.getProducts().forEach(prod -> table.getProducts().add(prod));
+    public TableAddProductResponse addProductToTable(Long id, List<ProductEntity> request) {
+        var table = tableRepository.findById(id).orElseThrow();
+        request.forEach(prod -> table.getProducts().add(prod));
 
         Double costs = 0.0;
-        for (var product: request.getProducts()) {
+        for (var product: request) {
             costs += product.getPrice();
         }
         table.setOpenCosts(costs);
+        table.setOccupied(true);
+        table.setOccupiedFrom(LocalDateTime.now());
+
         tableRepository.save(table);
         return new TableAddProductResponse(
                 table.getId(),
-                table.getProducts(),
                 costs
         );
+    }
+
+    public List<ProductEntity> getProductsByTableId(Long id) {
+        var products = tableRepository.findById(id).orElseThrow();
+        log.info(products.toString());
+        return products.getProducts();
+    }
+
+    public void updateTablesPositions(List<TableEntity> tables) {
+        tableRepository.saveAll(tables);
     }
 }

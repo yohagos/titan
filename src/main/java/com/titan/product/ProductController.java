@@ -2,7 +2,7 @@ package com.titan.product;
 
 import com.titan.product.request.ProductAddRequest;
 import com.titan.product.response.ProductResponse;
-import com.titan.user.request.ProductUpdateRequest;
+import com.titan.product.request.ProductUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
