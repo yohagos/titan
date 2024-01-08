@@ -54,35 +54,20 @@ public class Runner {
                     )
             );
 
-            tableRepository.saveAll(
-                    List.of(
-                            new TableEntity(1L, 100, 0.0D, 4, false,
-                                    null, null, List.of()),
-                            new TableEntity(2L, 110, 0.0D, 2, false,
-                                    null, null, List.of()),
-                            new TableEntity(3L, 120, 0.0D, 4, false,
-                                    null, null, List.of()),
-                            new TableEntity(4L, 210, 0.0D, 6, false,
-                                    null, null, List.of()),
-                            new TableEntity(5L, 220, 0.0D, 4, false,
-                                    null, null, List.of()),
-                            new TableEntity(6L, 300, 0.0D, 8, false,
-                                    null, null, List.of())
-                    )
-            );
+
 
             categoryRepository.saveAll(
                     List.of(
-                            new ProductCategoryEntity(1L, "Drink", "0.5", CategoryUnit.ML.name(), "#86d3a0"),
-                            new ProductCategoryEntity(2L, "Cocktail", "0.3", CategoryUnit.ML.name(), "#a2a2d0"),
-                            new ProductCategoryEntity(3L, "Drink", "0.2", CategoryUnit.ML.name(), "#86d3a0"),
-                            new ProductCategoryEntity(4L, "Drink", "0.4", CategoryUnit.ML.name(), "#86d3a0"),
-                            new ProductCategoryEntity(5L, "Starter", "500.0", CategoryUnit.MG.name(), "#f4d9cc"),
-                            new ProductCategoryEntity(6L, "Lunch", "800.0", CategoryUnit.G.name(), "#f6c19c"),
-                            new ProductCategoryEntity(7L, "Brunch", "400.0", CategoryUnit.G.name(), "#f59794"),
-                            new ProductCategoryEntity(8L, "Main", "600.0", CategoryUnit.G.name(), "#a3c1ad"),
-                            new ProductCategoryEntity(9L, "Dessert", "300.0", CategoryUnit.G.name(), "#f5cc7f"),
-                            new ProductCategoryEntity(10L, "Dessert", "350.0", CategoryUnit.G.name(), "#f5cc7f")
+                            new ProductCategoryEntity(1L, "Drink", 0.5, CategoryUnit.ML.name(), "#86d3a0"),
+                            new ProductCategoryEntity(2L, "Cocktail", 0.3, CategoryUnit.ML.name(), "#a2a2d0"),
+                            new ProductCategoryEntity(3L, "Drink", 0.2, CategoryUnit.ML.name(), "#86d3a0"),
+                            new ProductCategoryEntity(4L, "Drink", 0.4, CategoryUnit.ML.name(), "#86d3a0"),
+                            new ProductCategoryEntity(5L, "Starter", 500.0, CategoryUnit.MG.name(), "#f4d9cc"),
+                            new ProductCategoryEntity(6L, "Lunch", 800.0, CategoryUnit.G.name(), "#f6c19c"),
+                            new ProductCategoryEntity(7L, "Brunch", 400.0, CategoryUnit.G.name(), "#f59794"),
+                            new ProductCategoryEntity(8L, "Main", 600.0, CategoryUnit.G.name(), "#a3c1ad"),
+                            new ProductCategoryEntity(9L, "Dessert", 300.0, CategoryUnit.G.name(), "#f5cc7f"),
+                            new ProductCategoryEntity(10L, "Dessert", 350.0, CategoryUnit.G.name(), "#f5cc7f")
                     )
             );
 
@@ -113,6 +98,32 @@ public class Runner {
                             new ProductEntity(18L, "Udon", 12.5D, categoryLunch),
                             new ProductEntity(19L, "Chicken", 17.0D, categoryLunch),
                             new ProductEntity(20L, "Spaghetti", 10.4D, categoryLunch)
+                    )
+            );
+
+            var tableOne = List.of(
+                    new ProductEntity(13L, "Mai Tai", 13.0D, categoryCocktail),
+                    new ProductEntity(14L, "Martini", 13.0D, categoryCocktail),
+                    new ProductEntity(15L, "Negroni", 11.0D, categoryCocktail)
+            );
+
+            var tableTwo = List.of(
+                    new ProductEntity(13L, "Mai Tai", 13.0D, categoryCocktail),
+                    new ProductEntity(14L, "Martini", 13.0D, categoryCocktail),
+                    new ProductEntity(15L, "Negroni", 11.0D, categoryCocktail)
+            );
+
+            tableRepository.saveAll(
+                    List.of(
+                            new TableEntity(1L, 100, 0.0D, 4, false,null, null, 100, 230, List.of()),
+                            new TableEntity(2L, 110, 0.0D, 2, false,null, null, 46, 175, List.of()),
+                            new TableEntity(3L, 120, 0.0D, 4, false,null, null, -10, 120, List.of()),
+                            new TableEntity(4L, 210, 0.0D, 6, true,null, null, 65, 188, tableOne),
+                            new TableEntity(5L, 220, 0.0D, 4, false,null, null, 81, 187, List.of()),
+                            new TableEntity(6L, 300, 0.0D, 8, true, null, null, 190, 204, tableTwo),
+                            new TableEntity(7L, 310, 0.0D, 6, false, null, null, 212, 204, List.of()),
+                            new TableEntity(8L, 420, 0.0D, 4, false, null, null, -55, 382, List.of()),
+                            new TableEntity(9L, 400, 0.0D, 8, false, null, null, -206, 382, List.of())
                     )
             );
 
