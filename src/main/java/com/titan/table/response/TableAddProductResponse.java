@@ -15,6 +15,5 @@ import java.util.List;
 public class TableAddProductResponse {
 
     private Long id;
-    private List<ProductEntity> products;
     private Double costs;
 }

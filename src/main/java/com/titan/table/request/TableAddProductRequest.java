@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
@@ -14,8 +15,9 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class TableAddProductRequest {
+public class TableAddProductRequest implements Serializable {
 
     private Long id;
-    private List<ProductEntity> products;
+    private List<Long> products;
+
 }

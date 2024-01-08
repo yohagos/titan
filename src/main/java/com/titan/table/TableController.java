@@ -1,11 +1,13 @@
 package com.titan.table;
 
-import com.titan.table.request.TableAddProductRequest;
+import com.titan.product.ProductEntity;
 import com.titan.table.request.TableRequest;
 import com.titan.table.response.TableAddProductResponse;
 import com.titan.table.response.TableCloseResponse;
 import com.titan.table.response.TableResponse;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,15 +15,34 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("api/v1/table")
+@RequestMapping("/api/v1/table")
 @RequiredArgsConstructor
 public class TableController {
 
     private final TableService tableService;
 
+    private static final Logger log = LoggerFactory.getLogger(TableController.class);
+
     @GetMapping
     public ResponseEntity<List<TableEntity>> getTables() {
         return ResponseEntity.ok(tableService.getTableList());
+    }
+
+    @GetMapping("/{tableId}")
+    public ResponseEntity<List<ProductEntity>> getProductsForTable(
+            @PathVariable(name = "tableId") Long id
+    ) {
+        log.info(id.toString());
+        return ResponseEntity.ok(tableService.getProductsByTableId(id));
+    }
+
+    @PutMapping
+    public ResponseEntity updateTables(
+            @RequestBody List<TableEntity> tables
+    ) {
+        log.info(tables.toString());
+        tableService.updateTablesPositions(tables);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping("/add")
@@ -31,19 +52,12 @@ public class TableController {
         return ResponseEntity.ok(tableService.createTable(request));
     }
 
-    @PutMapping("/{tableId}")
-    public ResponseEntity<?> occupyTable(
-            @PathVariable(name = "tableId") Long id
-    ) {
-        tableService.occupyTableNow(id);
-        return ResponseEntity.ok().build();
-    }
-
-    @PutMapping
+    @PutMapping("/store/{tableId}")
     public ResponseEntity<TableAddProductResponse> addProductToTable(
-            @RequestBody TableAddProductRequest request
+            @PathVariable(name = "tableId") Long id,
+            @RequestBody List<ProductEntity> request
     ) {
-        return ResponseEntity.ok(tableService.addProductToTable(request));
+        return ResponseEntity.ok(tableService.addProductToTable(id, request));
     }
 
     @PutMapping("/edit/{tableId}")
@@ -59,6 +73,14 @@ public class TableController {
             @PathVariable(name = "tableId") Long id
     ) {
         return ResponseEntity.ok(tableService.closeTable(id));
+    }
+
+    @PutMapping("/{tableId}")
+    public ResponseEntity<?> occupyTable(
+            @PathVariable(name = "tableId") Long id
+    ) {
+        tableService.occupyTableNow(id);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{tableId}")

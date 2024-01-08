@@ -1,4 +1,4 @@
-package com.titan.product.category;
+package com.titan.settings;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
@@ -9,28 +9,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.Map;
+
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ProductCategoryEntity {
+public class SettingEntity implements Serializable {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String categoryName;
-    private double measurement;
-    private String unit;
-    private String color;
 
-    ProductCategoryEntity(String name, double measure, String unit, String color) {
-        categoryName = name;
-        measurement = measure;
-        this.unit = unit;
-        this.color = color;
-    }
-
+    /*private Map<String, String> settings;*/
 }

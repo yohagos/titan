@@ -30,18 +30,23 @@ public class TableEntity {
     private LocalDateTime occupiedFrom;
     private LocalDateTime occupiedTill;
 
+    private Integer positionX;
+    private Integer positionY;
+
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
     private List<ProductEntity> products;
 
-    TableEntity(Integer tableNumber, Integer numberOfPeople) {
+    TableEntity(Integer tableNumber, Integer numberOfPeople, Integer positionX, Integer positionY) {
         this.tableNumber = tableNumber;
         this.numberOfPeople = numberOfPeople;
+        this.positionX = positionX;
+        this.positionY = positionY;
     }
 
     @Override
     public String toString() {
-        return String.format("Product=[id=%d, tableNumber=%d, numberOfPeople=%d]",
-                getId(), getTableNumber(), getNumberOfPeople());
+        return String.format("Table=[id=%d, tableNumber=%d, numberOfPeople=%d, positionX=%d, positionY=%d]",
+                getId(), getTableNumber(), getNumberOfPeople(), getPositionX(), getPositionY());
     }
 }

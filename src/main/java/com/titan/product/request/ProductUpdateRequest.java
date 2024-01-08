@@ -1,4 +1,4 @@
-package com.titan.user.request;
+package com.titan.product.request;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.titan.product.category.ProductCategoryEntity;
@@ -17,5 +17,5 @@ public class ProductUpdateRequest {
     private Long id;
     private String name;
     private Double price;
-    private ProductCategoryEntity category;
+    private Long categoryId;
 }
