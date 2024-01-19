@@ -50,6 +50,10 @@ public class Runner {
                             new UserEntity(
                                     3L, "Benni","Elaine", "benni@elaine.com",
                                     passwordEncoder.encode("elaine"), 4321, LocalDateTime.now(), UserRole.ADMIN
+                            ),
+                            new UserEntity(
+                                    4L, "Yosef","Hagos", "yosef@hagos.com",
+                                    passwordEncoder.encode("hagos"), 4321, LocalDateTime.now(), UserRole.ADMIN
                             )
                     )
             );

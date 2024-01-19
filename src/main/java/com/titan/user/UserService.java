@@ -2,6 +2,8 @@ package com.titan.user;
 
 import com.titan.user.request.UserPinUpdateRequest;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +13,8 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+
+    private final static Logger log = LoggerFactory.getLogger(UserService.class);
 
 
     public List<UserEntity> getUserList() {
@@ -25,5 +29,11 @@ public class UserService {
             throw new IllegalArgumentException("Length of Pin has to be 4 digits");
         user.setPin(request.getPin());
         userRepository.save(user);
+    }
+
+    public UserEntity checkUserPin(Integer pin) {
+        var user = userRepository.findUserByPin(pin).orElseThrow();
+        log.warn(user.toString());
+        return user;
     }
 }
