@@ -57,8 +57,6 @@ class UserServiceTest {
     @Test
     @DisplayName("checkUserPin")
     public void shouldFindAUserDependingOnThePin() {
-        when(userService.checkUserPin(user1.getPin()))
-                .thenReturn(user1);
         when(userRepository.findUserByPin(user1.getPin()))
                 .thenReturn(Optional.of(user1));
         var user = userService.checkUserPin(1111);
