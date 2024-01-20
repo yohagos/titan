@@ -1,5 +1,6 @@
 package com.titan.user;
 
+import com.titan.user.request.UserPinUpdateRequest;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -61,6 +62,16 @@ class UserServiceTest {
                 .thenReturn(Optional.of(user1));
         var user = userService.checkUserPin(1111);
         assertEquals(user1, user, "optional user and test user are not equal");
+    }
+
+    @Test
+    @DisplayName("updateUserPin")
+    public void shouldChangeUserPin() {
+        when(userRepository.findById(user1.getId()))
+                .thenReturn(Optional.of(user1));
+        userService.updateUserPin(new UserPinUpdateRequest(6666, user1.getId()));
+        var optionalUser = userRepository.findById(user1.getId()).orElseThrow();
+        assertEquals(user1.getPin(), optionalUser.getPin(), "Pin was not changed");
     }
 
     private static void setUpUserList() {
