@@ -28,7 +28,6 @@ public class UserController {
     public ResponseEntity<UserEntity> checkUser(
             @PathVariable(name = "pin") Integer pin
     ) {
-        log.info(pin.toString());
         return ResponseEntity.ok(userService.checkUserPin(pin));
     }
 
