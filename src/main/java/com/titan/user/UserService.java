@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -21,7 +22,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void updateUserPin(UserPinUpdateRequest request) {
+    public UserEntity updateUserPin(UserPinUpdateRequest request) {
         var user = userRepository.findById(request.getUserId()).orElseThrow();
         if (request.getUserId() == null || (user.getPin() != null && request.getPin() == user.getPin()))
             throw new IllegalArgumentException("Pin of User " + user.getUsername() + " cannot be changes");
@@ -29,11 +30,15 @@ public class UserService {
             throw new IllegalArgumentException("Length of Pin has to be 4 digits");
         user.setPin(request.getPin());
         userRepository.save(user);
+
+        return user;
     }
 
     public UserEntity checkUserPin(Integer pin) {
-        var user = userRepository.findUserByPin(pin).orElseThrow();
-        log.warn(user.toString());
-        return user;
+        return userRepository.findUserByPin(pin).orElseThrow();
+    }
+
+    public Optional<UserEntity> findUserById(Long id) {
+        return userRepository.findById(id);
     }
 }
