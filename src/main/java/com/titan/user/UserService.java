@@ -22,7 +22,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void updateUserPin(UserPinUpdateRequest request) {
+    public UserEntity updateUserPin(UserPinUpdateRequest request) {
         var user = userRepository.findById(request.getUserId()).orElseThrow();
         if (request.getUserId() == null || (user.getPin() != null && request.getPin() == user.getPin()))
             throw new IllegalArgumentException("Pin of User " + user.getUsername() + " cannot be changes");
@@ -30,6 +30,8 @@ public class UserService {
             throw new IllegalArgumentException("Length of Pin has to be 4 digits");
         user.setPin(request.getPin());
         userRepository.save(user);
+
+        return user;
     }
 
     public UserEntity checkUserPin(Integer pin) {

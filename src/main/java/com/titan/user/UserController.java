@@ -35,7 +35,6 @@ public class UserController {
     public ResponseEntity<?> updatePin(
             @RequestBody UserPinUpdateRequest request
     ) {
-        userService.updateUserPin(request);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(userService.updateUserPin(request));
     }
 }
