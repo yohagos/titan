@@ -89,11 +89,11 @@ public class UserService {
                 .filter(
                         pin -> pin != user.getPin()
                 ).ifPresent(user::setPin);
-        Optional.ofNullable(role)
+        Optional.of(role)
                 .filter(
-                        r -> !r.equals(r)
+                        r -> !r.equals(user.getRole())
                 ).ifPresent(user::setRole);
-        userRepository.save(user);
-        return user;
+        var response = userRepository.save(user);
+        return response;
     }
 }

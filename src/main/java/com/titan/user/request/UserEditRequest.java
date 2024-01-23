@@ -1,6 +1,6 @@
 package com.titan.user.request;
 
-import com.titan.user.UserRole;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
