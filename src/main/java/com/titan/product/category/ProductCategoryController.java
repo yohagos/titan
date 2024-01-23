@@ -39,6 +39,7 @@ public class ProductCategoryController {
             @PathVariable(name = "categoryId") Long id,
             @RequestBody ProductCategoryRequest request
     ) {
+        log.info(request.toString());
         return ResponseEntity.ok(categoryService.updateCategory(id, request));
     }
 

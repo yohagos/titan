@@ -1,6 +1,7 @@
 package com.titan.product.category;
 
 import com.titan.product.ProductService;
+import com.titan.product.category.icons.IconsRepository;
 import com.titan.product.request.ProductCategoryRequest;
 import com.titan.product.response.ProductCategoryResponse;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.Optional;
 public class ProductCategoryService {
 
     private final ProductCategoryRepository categoryRepository;
+    private final IconsRepository iconsRepository;
 
     private static final Logger log = LoggerFactory.getLogger(ProductCategoryService.class);
 
@@ -31,9 +33,10 @@ public class ProductCategoryService {
         if ((request.getUnit() == null || request.getUnit().isEmpty()) && (request.getMeasurement() <= 0.0 )) {
             throw new IllegalArgumentException("Category unit is null or empty, cannot be added");
         }
+        var icon = iconsRepository.findById(request.getIconId());
 
         var category = categoryRepository.save(
-                new ProductCategoryEntity(request.getCategoryName(), request.getMeasurement(), request.getUnit(), request.getColor())
+                new ProductCategoryEntity(request.getCategoryName(), request.getMeasurement(), request.getUnit(), request.getColor(), icon.get())
         );
 
         return new ProductCategoryResponse(
@@ -46,6 +49,9 @@ public class ProductCategoryService {
 
     public ProductCategoryResponse updateCategory(Long id, ProductCategoryRequest request) {
         var category = categoryRepository.findById(id).orElseThrow();
+        log.info(request.toString());
+
+        var icon = iconsRepository.findById(request.getIconId()).orElseThrow();
 
         Optional.ofNullable(request.getCategoryName())
                         .filter(name -> !name.isEmpty() || !name.contentEquals(category.getCategoryName()))
@@ -53,12 +59,15 @@ public class ProductCategoryService {
         Optional.ofNullable(request.getUnit())
                         .filter(unit -> !unit.isEmpty() || !unit.contentEquals(category.getUnit()))
                                 .ifPresent(category::setUnit);
-        Optional.ofNullable(request.getMeasurement())
+        Optional.of(request.getMeasurement())
                         .filter(measure -> measure <= 0.0)
                                 .ifPresent(category::setMeasurement);
         Optional.ofNullable(request.getColor())
                         .filter(color -> !color.isEmpty() || !color.contentEquals(category.getColor()))
                                 .ifPresent(category::setColor);
+        Optional.ofNullable(icon)
+                        .filter(i -> !i.equals(category.getIcon()))
+                                .ifPresent(category::setIcon);
         categoryRepository.save(category);
         return new ProductCategoryResponse(
                 category.getId(),
