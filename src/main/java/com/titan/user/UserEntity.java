@@ -77,8 +77,8 @@ public class UserEntity implements UserDetails, Serializable {
     @Override
     public String toString() {
         return String.format(
-                "User=[id=%d, fullname='%s %s', email=%s]",
-                getId(), getFirstname(), getLastname(), getEmail()
+                "User=[id=%d, fullname='%s %s', email=%s, role=%s, pin=%d]",
+                getId(), getFirstname(), getLastname(), getEmail(), getRole(), getPin()
         );
     }
 
