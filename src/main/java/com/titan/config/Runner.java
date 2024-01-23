@@ -5,6 +5,8 @@ import com.titan.product.ProductRepository;
 import com.titan.product.category.CategoryUnit;
 import com.titan.product.category.ProductCategoryEntity;
 import com.titan.product.category.ProductCategoryRepository;
+import com.titan.product.category.icons.IconsEntity;
+import com.titan.product.category.icons.IconsRepository;
 import com.titan.table.TableEntity;
 import com.titan.table.TableRepository;
 import com.titan.user.UserEntity;
@@ -34,7 +36,8 @@ public class Runner {
             UserRepository userRepository,
             TableRepository tableRepository,
             ProductRepository productRepository,
-            ProductCategoryRepository categoryRepository
+            ProductCategoryRepository categoryRepository,
+            IconsRepository iconsRepository
     ) {
         return args -> {
             userRepository.saveAll(
@@ -55,6 +58,24 @@ public class Runner {
                                     4L, "Yosef","Hagos", "yosef@hagos.com",
                                     passwordEncoder.encode("hagos"), 4321, LocalDateTime.now(), UserRole.ADMIN
                             )
+                    )
+            );
+            var iconDessert = new IconsEntity(5L, "cake", "Cake");
+            var iconLocalBar = new IconsEntity(8L, "local_bar", "Local Bar");
+
+            iconsRepository.saveAll(
+                    List.of(
+                            new IconsEntity(1L, "coffee", "Coffee"),
+                            new IconsEntity(2L, "liquor", "Liquor"),
+                            new IconsEntity(3L, "wine_bar", "Wine Bar"),
+                            new IconsEntity(4L, "lunch_dining", "Lunch Dining"),
+                            iconDessert,
+                            new IconsEntity(6L, "dinner_dining", "Dinner Dining"),
+                            new IconsEntity(7L, "restaurant", "Restaurant"),
+                            iconLocalBar,
+                            new IconsEntity(9L, "bakery_dining", "Bakery Dining"),
+                            new IconsEntity(10L, "local_dining", "Local Dining"),
+                            new IconsEntity(11L, "icecream", "Icecream")
                     )
             );
 
@@ -135,6 +156,7 @@ public class Runner {
             log.info(tableRepository.findAll().toString());
             log.info(productRepository.findAll().toString());
             log.info(categoryRepository.findAll().toString());
+            log.info(iconsRepository.findAll().toString());
         };
     }
 }
