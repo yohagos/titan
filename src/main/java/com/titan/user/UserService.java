@@ -87,13 +87,12 @@ public class UserService {
                 ).ifPresent(user::setEmail);
         Optional.ofNullable(request.getPin())
                 .filter(
-                        pin -> pin != user.getPin()
+                        pin -> !pin.equals(user.getPin())
                 ).ifPresent(user::setPin);
         Optional.of(role)
                 .filter(
                         r -> !r.equals(user.getRole())
                 ).ifPresent(user::setRole);
-        var response = userRepository.save(user);
-        return response;
+        return userRepository.save(user);
     }
 }
