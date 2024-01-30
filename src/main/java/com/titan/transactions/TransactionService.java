@@ -1,5 +1,6 @@
 package com.titan.transactions;
 
+import com.titan.product.ProductEntity;
 import com.titan.transactions.request.TransactionCardRequest;
 import com.titan.transactions.request.TransactionCashRequest;
 import com.titan.user.UserRepository;
@@ -11,6 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -55,5 +57,14 @@ public class TransactionService {
 
     public List<TransactionEntity> getTransactionsForDate(LocalDate date) {
         return transactionRepository.findByDate(date);
+    }
+
+    public TransactionEntity addProductsToTransaction(Long id, List<ProductEntity> products) {
+        var transaction = transactionRepository.findById(id).orElseThrow();
+
+        Optional.of(products)
+                .filter(prod -> !prod.isEmpty())
+                .ifPresent(transaction::setProducts);
+        return transactionRepository.save(transaction);
     }
 }

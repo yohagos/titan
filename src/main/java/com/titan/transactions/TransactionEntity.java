@@ -1,5 +1,6 @@
 package com.titan.transactions;
 
+import com.titan.product.ProductEntity;
 import com.titan.user.UserEntity;
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,6 +9,7 @@ import org.springframework.cglib.core.Local;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -25,6 +27,9 @@ public class TransactionEntity implements Serializable {
     private String cardNumber;
     private Boolean paid;
     private LocalDateTime date;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<ProductEntity> products;
 
     @ManyToOne
     private UserEntity user;

@@ -1,5 +1,6 @@
 package com.titan.transactions;
 
+import com.titan.product.ProductEntity;
 import com.titan.transactions.request.TransactionCardRequest;
 import com.titan.transactions.request.TransactionCashRequest;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,6 @@ public class TransactionController {
     public ResponseEntity<List<TransactionEntity>> getTransactionForDate(
             @PathVariable(name = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate date
     ) {
-        log.info(date.toString());
         return ResponseEntity.ok(transactionService.getTransactionsForDate(date));
     }
 
@@ -42,7 +42,17 @@ public class TransactionController {
     public ResponseEntity<TransactionEntity> cashTransaction(
             @RequestBody TransactionCashRequest request
     ) {
+        log.info(request.toString());
         return ResponseEntity.ok(transactionService.setCashTransaction(request));
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<TransactionEntity> updateTransaction(
+            @PathVariable(name = "id") Long id,
+            @RequestBody List<ProductEntity> products
+    ) {
+        log.info((products.toString()));
+        return ResponseEntity.ok(transactionService.addProductsToTransaction(id, products));
     }
 
     @PostMapping("/card")
