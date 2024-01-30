@@ -1,13 +1,9 @@
 package com.titan.product.category;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.titan.product.category.icons.IconsEntity;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Data
 @Builder
@@ -26,11 +22,22 @@ public class ProductCategoryEntity {
     private String unit;
     private String color;
 
-    ProductCategoryEntity(String name, double measure, String unit, String color) {
+    @ManyToOne
+    private IconsEntity icon;
+
+    /*ProductCategoryEntity(String name, double measure, String unit, String color) {
         categoryName = name;
         measurement = measure;
         this.unit = unit;
         this.color = color;
+    }*/
+
+    ProductCategoryEntity(String name, double measure, String unit, String color, IconsEntity icon) {
+        categoryName = name;
+        measurement = measure;
+        this.unit = unit;
+        this.color = color;
+        this.icon = icon;
     }
 
 }

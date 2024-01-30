@@ -5,6 +5,8 @@ import com.titan.product.ProductRepository;
 import com.titan.product.category.CategoryUnit;
 import com.titan.product.category.ProductCategoryEntity;
 import com.titan.product.category.ProductCategoryRepository;
+import com.titan.product.category.icons.IconsEntity;
+import com.titan.product.category.icons.IconsRepository;
 import com.titan.table.TableEntity;
 import com.titan.table.TableRepository;
 import com.titan.user.UserEntity;
@@ -34,7 +36,8 @@ public class Runner {
             UserRepository userRepository,
             TableRepository tableRepository,
             ProductRepository productRepository,
-            ProductCategoryRepository categoryRepository
+            ProductCategoryRepository categoryRepository,
+            IconsRepository iconsRepository
     ) {
         return args -> {
             userRepository.saveAll(
@@ -58,20 +61,41 @@ public class Runner {
                     )
             );
 
+            var iconDessert = new IconsEntity(5L, "cake", "Cake");
+            var iconLocalBar = new IconsEntity(8L, "local_bar", "Local Bar");
+            var iconIcecream = new IconsEntity(11L, "icecream", "Icecream");
+            var iconDinner = new IconsEntity(6L, "dinner_dining", "Dinner Dining");
+
+            iconsRepository.saveAll(
+                    List.of(
+                            new IconsEntity(1L, "coffee", "Coffee"),
+                            new IconsEntity(2L, "liquor", "Liquor"),
+                            new IconsEntity(3L, "wine_bar", "Wine Bar"),
+                            new IconsEntity(4L, "lunch_dining", "Lunch Dining"),
+                            iconDessert,
+                            iconDinner,
+                            new IconsEntity(7L, "restaurant", "Restaurant"),
+                            iconLocalBar,
+                            new IconsEntity(9L, "bakery_dining", "Bakery Dining"),
+                            new IconsEntity(10L, "local_dining", "Local Dining"),
+                            iconIcecream
+                    )
+            );
+
 
 
             categoryRepository.saveAll(
                     List.of(
-                            new ProductCategoryEntity(1L, "Drink", 0.5, CategoryUnit.ML.name(), "#86d3a0"),
-                            new ProductCategoryEntity(2L, "Cocktail", 0.3, CategoryUnit.ML.name(), "#a2a2d0"),
-                            new ProductCategoryEntity(3L, "Drink", 0.2, CategoryUnit.ML.name(), "#86d3a0"),
-                            new ProductCategoryEntity(4L, "Drink", 0.4, CategoryUnit.ML.name(), "#86d3a0"),
-                            new ProductCategoryEntity(5L, "Starter", 500.0, CategoryUnit.MG.name(), "#f4d9cc"),
-                            new ProductCategoryEntity(6L, "Lunch", 800.0, CategoryUnit.G.name(), "#f6c19c"),
-                            new ProductCategoryEntity(7L, "Brunch", 400.0, CategoryUnit.G.name(), "#f59794"),
-                            new ProductCategoryEntity(8L, "Main", 600.0, CategoryUnit.G.name(), "#a3c1ad"),
-                            new ProductCategoryEntity(9L, "Dessert", 300.0, CategoryUnit.G.name(), "#f5cc7f"),
-                            new ProductCategoryEntity(10L, "Dessert", 350.0, CategoryUnit.G.name(), "#f5cc7f")
+                            new ProductCategoryEntity(1L, "Drink", 0.5, CategoryUnit.ML.name(), "#86d3a0", iconLocalBar),
+                            new ProductCategoryEntity(2L, "Cocktail", 0.3, CategoryUnit.ML.name(), "#a2a2d0", iconLocalBar),
+                            new ProductCategoryEntity(3L, "Drink", 0.2, CategoryUnit.ML.name(), "#86d3a0", iconLocalBar),
+                            new ProductCategoryEntity(4L, "Drink", 0.4, CategoryUnit.ML.name(), "#86d3a0", iconLocalBar),
+                            new ProductCategoryEntity(5L, "Starter", 500.0, CategoryUnit.MG.name(), "#f4d9cc", iconDinner),
+                            new ProductCategoryEntity(6L, "Lunch", 800.0, CategoryUnit.G.name(), "#f6c19c", iconDinner),
+                            new ProductCategoryEntity(7L, "Brunch", 400.0, CategoryUnit.G.name(), "#f59794", iconDinner),
+                            new ProductCategoryEntity(8L, "Main", 600.0, CategoryUnit.G.name(), "#a3c1ad", iconDinner),
+                            new ProductCategoryEntity(9L, "Dessert", 300.0, CategoryUnit.G.name(), "#f5cc7f", iconDessert),
+                            new ProductCategoryEntity(10L, "Dessert", 350.0, CategoryUnit.G.name(), "#f5cc7f", iconDessert)
                     )
             );
 
@@ -135,6 +159,7 @@ public class Runner {
             log.info(tableRepository.findAll().toString());
             log.info(productRepository.findAll().toString());
             log.info(categoryRepository.findAll().toString());
+            log.info(iconsRepository.findAll().toString());
         };
     }
 }
