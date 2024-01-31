@@ -28,7 +28,7 @@ public class TransactionEntity implements Serializable {
     private Boolean paid;
     private LocalDateTime date;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<ProductEntity> products;
 
     @ManyToOne

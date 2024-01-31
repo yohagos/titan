@@ -1,16 +1,17 @@
 package com.titan.transactions;
 
+import com.titan.exceptions.TransactionsNotFoundException;
 import com.titan.product.ProductEntity;
 import com.titan.transactions.request.TransactionCardRequest;
 import com.titan.transactions.request.TransactionCashRequest;
 import com.titan.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +21,8 @@ public class TransactionService {
 
     private final TransactionRepository transactionRepository;
     private final UserRepository userRepository;
+
+    private static final Logger log = LoggerFactory.getLogger(TransactionService.class);
 
     public List<TransactionEntity> getTransactions() {
         return transactionRepository.findAll();
@@ -66,5 +69,11 @@ public class TransactionService {
                 .filter(prod -> !prod.isEmpty())
                 .ifPresent(transaction::setProducts);
         return transactionRepository.save(transaction);
+    }
+
+    public TransactionEntity cancelTransaction(Long id) {
+        var transaction = transactionRepository.findById(id).orElseThrow();
+        transactionRepository.deleteById(transaction.getId());
+        return transaction;
     }
 }
