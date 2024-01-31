@@ -19,7 +19,7 @@ public class StorageEntity implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long is;
+    private Long id;
     private String name;
     private Double pricePerBottle;
     private Integer stockOfBottles;
@@ -31,7 +31,7 @@ public class StorageEntity implements Serializable {
     public String toString() {
         return String.format(
                 "Storage=[id=%s, name=%s, pricePerBottle=%s, stockOfBottles=%d, currentStock=%s, criticalStockOfBottles=%d]",
-                getIs(), getName(), getPricePerBottle(), getStockOfBottles(), getCurrentStock(), getCriticalStockOfBottles()
+                getId(), getName(), getPricePerBottle(), getStockOfBottles(), getCurrentStock(), getCriticalStockOfBottles()
         );
     }
 
