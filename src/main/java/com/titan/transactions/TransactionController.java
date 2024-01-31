@@ -42,7 +42,6 @@ public class TransactionController {
     public ResponseEntity<TransactionEntity> cashTransaction(
             @RequestBody TransactionCashRequest request
     ) {
-        log.info(request.toString());
         return ResponseEntity.ok(transactionService.setCashTransaction(request));
     }
 
@@ -51,7 +50,6 @@ public class TransactionController {
             @PathVariable(name = "id") Long id,
             @RequestBody List<ProductEntity> products
     ) {
-        log.info((products.toString()));
         return ResponseEntity.ok(transactionService.addProductsToTransaction(id, products));
     }
 
@@ -60,5 +58,12 @@ public class TransactionController {
             @RequestBody TransactionCardRequest request
     ) {
         return ResponseEntity.ok(transactionService.setCardTransaction(request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<TransactionEntity> cancelTransaction(
+            @PathVariable(name = "id") Long id
+    ) {
+        return ResponseEntity.ok(transactionService.cancelTransaction(id));
     }
 }
