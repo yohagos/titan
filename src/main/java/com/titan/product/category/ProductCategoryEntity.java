@@ -25,13 +25,6 @@ public class ProductCategoryEntity {
     @ManyToOne
     private IconsEntity icon;
 
-    /*ProductCategoryEntity(String name, double measure, String unit, String color) {
-        categoryName = name;
-        measurement = measure;
-        this.unit = unit;
-        this.color = color;
-    }*/
-
     ProductCategoryEntity(String name, double measure, String unit, String color, IconsEntity icon) {
         categoryName = name;
         measurement = measure;
