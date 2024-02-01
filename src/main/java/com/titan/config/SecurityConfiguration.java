@@ -28,7 +28,7 @@ public class SecurityConfiguration {
             "/api/v1/category/**",
             "/api/v1/icons/**",
             "/api/v1/product/**",
-            "/api/v1/storage/**",
+            "/api/v1/storages/**",
             "/api/v1/table/**",
             "/api/v1/transactions/**",
             "/api/v1/user/**",
