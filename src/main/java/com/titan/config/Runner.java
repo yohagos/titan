@@ -9,6 +9,7 @@ import com.titan.product.category.icons.IconsEntity;
 import com.titan.product.category.icons.IconsRepository;
 import com.titan.product.stock.ProductsStockEntity;
 import com.titan.product.stock.ProductsStockRepository;
+import com.titan.product.stock.UnitConverter;
 import com.titan.storage.StorageEntity;
 import com.titan.storage.StorageRepository;
 import com.titan.table.TableEntity;
@@ -84,7 +85,9 @@ public class Runner {
 
             storageRepository.saveAll(
                     List.of(
-                            belvederStock, greyGooseStock, makersMakerStock, bombayStock
+                            belvederStock, greyGooseStock, makersMakerStock, bombayStock,
+                            simpleSyrupStock, cranberryJuiceStock, pomegranateSyrupStock, elderflowerSyrupStock,
+                            sparklingWaterStock, yuzuSyrupStock, basilSyrupStock, limeJuiceStock, campariStock, vermouthStock
                     )
             );
 
@@ -192,9 +195,9 @@ public class Runner {
                             new TableEntity(1L, 100, 0.0D, 4, false,null, null, 100, 230, List.of()),
                             new TableEntity(2L, 110, 0.0D, 2, false,null, null, 46, 175, List.of()),
                             new TableEntity(3L, 120, 0.0D, 4, false,null, null, -10, 120, List.of()),
-                            new TableEntity(4L, 210, 0.0D, 6, true,null, null, 65, 188, List.of()),
+                            new TableEntity(4L, 210, 0.0D, 6, false,null, null, 65, 188, List.of()),
                             new TableEntity(5L, 220, 0.0D, 4, false,null, null, 81, 187, List.of()),
-                            new TableEntity(6L, 300, 0.0D, 8, true, null, null, 190, 204, List.of()),
+                            new TableEntity(6L, 300, 0.0D, 8, false, null, null, 190, 204, List.of()),
                             new TableEntity(7L, 310, 0.0D, 6, false, null, null, 212, 204, List.of()),
                             new TableEntity(8L, 420, 0.0D, 4, false, null, null, -55, 382, List.of()),
                             new TableEntity(9L, 400, 0.0D, 8, false, null, null, -206, 382, List.of())
