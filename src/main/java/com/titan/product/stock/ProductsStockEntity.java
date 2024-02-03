@@ -22,7 +22,7 @@ public class ProductsStockEntity implements Serializable {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private CategoryUnit unit;
+    private UnitConverter.Unit unit;
     private Double measurement;
     private StorageEntity good;
 

@@ -2,6 +2,7 @@ package com.titan.transactions;
 
 import com.titan.exceptions.TransactionsNotFoundException;
 import com.titan.product.ProductEntity;
+import com.titan.product.stock.UnitConverter;
 import com.titan.storage.StorageRepository;
 import com.titan.transactions.request.TransactionCardRequest;
 import com.titan.transactions.request.TransactionCashRequest;
@@ -103,13 +104,13 @@ public class TransactionService {
     }
 
     private void balancingStock(ProductEntity prod) {
-        log.info(prod.getComponents().toString());
         var components = prod.getComponents();
         for (var stock: components ) {
-            var good = stock.getGood();
-            log.error(good.toString());
-            var x = storageRepository.findById(good.getId());
-            log.info(x.toString());
+            var measure = stock.getMeasurement();
+            var good = storageRepository.findById(stock.getGood().getId()).orElseThrow();
+            var currentStock = good.getCurrentStock() - UnitConverter.convert(measure, UnitConverter.Unit.CL, UnitConverter.Unit.L);
+            good.setCurrentStock(currentStock);
+            storageRepository.save(good);
         }
     }
 

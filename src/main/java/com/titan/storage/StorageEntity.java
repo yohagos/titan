@@ -1,5 +1,6 @@
 package com.titan.storage;
 
+import com.titan.product.category.CategoryUnit;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -23,6 +24,8 @@ public class StorageEntity implements Serializable {
     private String name;
     private Double pricePerBottle;
     private Integer stockOfBottles;
+    private CategoryUnit unit;
+    private Double measurement;
     private Double currentStock;
     private Integer criticalStockOfBottles;
 
@@ -30,8 +33,8 @@ public class StorageEntity implements Serializable {
     @Override
     public String toString() {
         return String.format(
-                "Storage=[id=%s, name=%s, pricePerBottle=%s, stockOfBottles=%d, currentStock=%s, criticalStockOfBottles=%d]",
-                getId(), getName(), getPricePerBottle(), getStockOfBottles(), getCurrentStock(), getCriticalStockOfBottles()
+                "Storage=[id=%s, name=%s, pricePerBottle=%s, stockOfBottles=%d, unit=%s, measurement=%s, currentStock=%s, criticalStockOfBottles=%d]",
+                getId(), getName(), getPricePerBottle(), getStockOfBottles(), getUnit(), getMeasurement(), getCurrentStock(), getCriticalStockOfBottles()
         );
     }
 

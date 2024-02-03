@@ -28,7 +28,7 @@ public class ProductEntity implements Serializable {
     private String name;
     private Double price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private ProductCategoryEntity category;
 
     @ManyToMany(fetch = FetchType.EAGER)

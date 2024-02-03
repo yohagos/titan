@@ -68,20 +68,20 @@ public class Runner {
                     )
             );
 
-            var belvederStock = new StorageEntity(1L, "Belveder", 22.75D, 20, 17D, 5);
-            var greyGooseStock = new StorageEntity(2L, "Grey Goose", 19.99D, 30, 22D, 10);
-            var makersMakerStock = new StorageEntity(3L, "Maker's Maker", 27.75D, 20, 19.5D, 7);
-            var bombayStock = new StorageEntity(4L, "Bombay Dry Gin", 16.5D, 30, 26.2D, 10);
-            var simpleSyrupStock = new StorageEntity(5L, "Simple Sirup", 7D, 10, 8.9D, 3);
-            var cranberryJuiceStock = new StorageEntity(6L, "Cranberry Juice", 4.99D, 10, 7.5D, 5);
-            var pomegranateSyrupStock = new StorageEntity(7L, "Pomegranate Syrup", 6.70D, 12, 8.5D, 4);
-            var elderflowerSyrupStock = new StorageEntity(8L, "Elderflower Syrup", 6.7D, 12, 9.2D, 5);
-            var sparklingWaterStock = new StorageEntity(9L, "Sparkling Water", 4.4D, 30, 22D, 10);
-            var yuzuSyrupStock = new StorageEntity(10L, "Yuzu Syrup", 6.7D, 12, 9.2D, 5);
-            var basilSyrupStock = new StorageEntity(11L, "Basil Water", 6.7D, 12, 9.2D, 5);
-            var limeJuiceStock = new StorageEntity(10L, "Yuzu Syrup", 6.7D, 12, 9.2D, 5);
-            var campariStock = new StorageEntity(12L, "Campari", 11D, 12, 11.2D, 6);
-            var vermouthStock = new StorageEntity(13L, "Vermouth", 9.2D, 12, 9.2D, 6);
+            var belvederStock = new StorageEntity(1L, "Belveder", 22.75D, 20, CategoryUnit.L, 1D, 17D, 5);
+            var greyGooseStock = new StorageEntity(2L, "Grey Goose", 19.99D, 30,CategoryUnit.L, 1D, 22D, 10);
+            var makersMakerStock = new StorageEntity(3L, "Maker's Maker", 27.75D, 20,CategoryUnit.L, 1D, 19.5D, 7);
+            var bombayStock = new StorageEntity(4L, "Bombay Dry Gin", 16.5D, 30,CategoryUnit.L, 1D, 26.2D, 10);
+            var simpleSyrupStock = new StorageEntity(5L, "Simple Sirup", 7D, 10,CategoryUnit.L, 1D, 8.9D, 3);
+            var cranberryJuiceStock = new StorageEntity(6L, "Cranberry Juice", 4.99D, 10,CategoryUnit.L, 1D, 7.5D, 5);
+            var pomegranateSyrupStock = new StorageEntity(7L, "Pomegranate Syrup", 6.70D, 12,CategoryUnit.L, 1D, 8.5D, 4);
+            var elderflowerSyrupStock = new StorageEntity(8L, "Elderflower Syrup", 6.7D, 12,CategoryUnit.L, 1D, 9.2D, 5);
+            var sparklingWaterStock = new StorageEntity(9L, "Sparkling Water", 4.4D, 30,CategoryUnit.L, 1D, 22D, 10);
+            var yuzuSyrupStock = new StorageEntity(10L, "Yuzu Syrup", 6.7D, 12,CategoryUnit.L, 1D, 9.2D, 5);
+            var basilSyrupStock = new StorageEntity(11L, "Basil Water", 6.7D, 12,CategoryUnit.L, 1D, 9.2D, 5);
+            var limeJuiceStock = new StorageEntity(10L, "Yuzu Syrup", 6.7D, 12,CategoryUnit.L, 1D, 9.2D, 5);
+            var campariStock = new StorageEntity(12L, "Campari", 11D, 12,CategoryUnit.L, 1D, 11.2D, 6);
+            var vermouthStock = new StorageEntity(13L, "Vermouth", 9.2D, 12,CategoryUnit.L, 1D, 9.2D, 6);
 
             storageRepository.saveAll(
                     List.of(
@@ -132,23 +132,23 @@ public class Runner {
 
             productsStockRepository.saveAll(
                     List.of(
-                            new ProductsStockEntity(1L, CategoryUnit.CL, 5D, makersMakerStock),
-                            new ProductsStockEntity(2L, CategoryUnit.CL, 1.5D, simpleSyrupStock),
-                            new ProductsStockEntity(3L, CategoryUnit.CL, 5D, pomegranateSyrupStock),
-                            new ProductsStockEntity(4L, CategoryUnit.ML, 3D, sparklingWaterStock),
-                            new ProductsStockEntity(5L, CategoryUnit.CL, 5D, elderflowerSyrupStock),
-                            new ProductsStockEntity(6L, CategoryUnit.ML, 3D, sparklingWaterStock),
-                            new ProductsStockEntity(7L, CategoryUnit.CL, 5D, yuzuSyrupStock),
-                            new ProductsStockEntity(8L, CategoryUnit.ML, 3D, sparklingWaterStock),
-                            new ProductsStockEntity(9L, CategoryUnit.CL, 5D, basilSyrupStock),
-                            new ProductsStockEntity(10L, CategoryUnit.ML, 3D, sparklingWaterStock),
-                            new ProductsStockEntity(11L, CategoryUnit.CL, 5D, belvederStock),
-                            new ProductsStockEntity(12L, CategoryUnit.CL, 3D, cranberryJuiceStock),
-                            new ProductsStockEntity(13L, CategoryUnit.CL, 1D, limeJuiceStock),
-                            new ProductsStockEntity(14L, CategoryUnit.CL, 1D, simpleSyrupStock),
-                            new ProductsStockEntity(15L, CategoryUnit.CL, 3D, bombayStock),
-                            new ProductsStockEntity(16L, CategoryUnit.CL, 3D, campariStock),
-                            new ProductsStockEntity(17L, CategoryUnit.CL, 3D, vermouthStock)
+                            new ProductsStockEntity(1L, UnitConverter.Unit.CL, 5D, makersMakerStock),
+                            new ProductsStockEntity(2L, UnitConverter.Unit.CL, 1.5D, simpleSyrupStock),
+                            new ProductsStockEntity(3L, UnitConverter.Unit.CL, 5D, pomegranateSyrupStock),
+                            new ProductsStockEntity(4L, UnitConverter.Unit.ML, 3D, sparklingWaterStock),
+                            new ProductsStockEntity(5L, UnitConverter.Unit.CL, 5D, elderflowerSyrupStock),
+                            new ProductsStockEntity(6L, UnitConverter.Unit.ML, 3D, sparklingWaterStock),
+                            new ProductsStockEntity(7L, UnitConverter.Unit.CL, 5D, yuzuSyrupStock),
+                            new ProductsStockEntity(8L, UnitConverter.Unit.ML, 3D, sparklingWaterStock),
+                            new ProductsStockEntity(9L, UnitConverter.Unit.CL, 5D, basilSyrupStock),
+                            new ProductsStockEntity(10L, UnitConverter.Unit.ML, 3D, sparklingWaterStock),
+                            new ProductsStockEntity(11L, UnitConverter.Unit.CL, 5D, belvederStock),
+                            new ProductsStockEntity(12L, UnitConverter.Unit.CL, 3D, cranberryJuiceStock),
+                            new ProductsStockEntity(13L, UnitConverter.Unit.CL, 1D, limeJuiceStock),
+                            new ProductsStockEntity(14L, UnitConverter.Unit.CL, 1D, simpleSyrupStock),
+                            new ProductsStockEntity(15L, UnitConverter.Unit.CL, 3D, bombayStock),
+                            new ProductsStockEntity(16L, UnitConverter.Unit.CL, 3D, campariStock),
+                            new ProductsStockEntity(17L, UnitConverter.Unit.CL, 3D, vermouthStock)
                     )
             );
 
