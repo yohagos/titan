@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 public enum CategoryUnit {
     MG("mg"),
     G("g"),
+    CL("cl"),
     ML("ml"),
     L("L");
 

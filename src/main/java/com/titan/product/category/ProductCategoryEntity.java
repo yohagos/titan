@@ -22,15 +22,8 @@ public class ProductCategoryEntity {
     private String unit;
     private String color;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private IconsEntity icon;
-
-    /*ProductCategoryEntity(String name, double measure, String unit, String color) {
-        categoryName = name;
-        measurement = measure;
-        this.unit = unit;
-        this.color = color;
-    }*/
 
     ProductCategoryEntity(String name, double measure, String unit, String color, IconsEntity icon) {
         categoryName = name;
@@ -38,6 +31,14 @@ public class ProductCategoryEntity {
         this.unit = unit;
         this.color = color;
         this.icon = icon;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "ProductCategory=[id=%d, measure=%s, unit=%s, color=%s, icon=%s]",
+                getId(), getMeasurement(), getUnit(), getColor(), getIcon()
+        );
     }
 
 }

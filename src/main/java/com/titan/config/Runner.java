@@ -7,6 +7,9 @@ import com.titan.product.category.ProductCategoryEntity;
 import com.titan.product.category.ProductCategoryRepository;
 import com.titan.product.category.icons.IconsEntity;
 import com.titan.product.category.icons.IconsRepository;
+import com.titan.product.stock.ProductsStockEntity;
+import com.titan.product.stock.ProductsStockRepository;
+import com.titan.product.stock.UnitConverter;
 import com.titan.storage.StorageEntity;
 import com.titan.storage.StorageRepository;
 import com.titan.table.TableEntity;
@@ -40,7 +43,8 @@ public class Runner {
             ProductRepository productRepository,
             ProductCategoryRepository categoryRepository,
             IconsRepository iconsRepository,
-            StorageRepository storageRepository
+            StorageRepository storageRepository,
+            ProductsStockRepository productsStockRepository
     ) {
         return args -> {
             userRepository.saveAll(
@@ -64,18 +68,28 @@ public class Runner {
                     )
             );
 
-            var belvederStock = new StorageEntity(1L, "Belveder", 22.75D, 20, 17D, 5);
-            var greyGooseStock = new StorageEntity(2L, "Grey Goose", 19.99D, 30, 22D, 10);
-            var makersMakerStock = new StorageEntity(3L, "Maker's Maker", 27.75D, 20, 19.5D, 7);
-            var bombayStock = new StorageEntity(4L, "Bombay Dry Gin", 16.5D, 30, 26.2D, 10);
+            var belvederStock = new StorageEntity(1L, "Belveder", 22.75D, 20, CategoryUnit.L, 1D, 17D, 5);
+            var greyGooseStock = new StorageEntity(2L, "Grey Goose", 19.99D, 30,CategoryUnit.L, 1D, 22D, 10);
+            var makersMakerStock = new StorageEntity(3L, "Maker's Maker", 27.75D, 20,CategoryUnit.L, 1D, 19.5D, 7);
+            var bombayStock = new StorageEntity(4L, "Bombay Dry Gin", 16.5D, 30,CategoryUnit.L, 1D, 26.2D, 10);
+            var simpleSyrupStock = new StorageEntity(5L, "Simple Sirup", 7D, 10,CategoryUnit.L, 1D, 8.9D, 3);
+            var cranberryJuiceStock = new StorageEntity(6L, "Cranberry Juice", 4.99D, 10,CategoryUnit.L, 1D, 7.5D, 5);
+            var pomegranateSyrupStock = new StorageEntity(7L, "Pomegranate Syrup", 6.70D, 12,CategoryUnit.L, 1D, 8.5D, 4);
+            var elderflowerSyrupStock = new StorageEntity(8L, "Elderflower Syrup", 6.7D, 12,CategoryUnit.L, 1D, 9.2D, 5);
+            var sparklingWaterStock = new StorageEntity(9L, "Sparkling Water", 4.4D, 30,CategoryUnit.L, 1D, 22D, 10);
+            var yuzuSyrupStock = new StorageEntity(10L, "Yuzu Syrup", 6.7D, 12,CategoryUnit.L, 1D, 9.2D, 5);
+            var basilSyrupStock = new StorageEntity(11L, "Basil Water", 6.7D, 12,CategoryUnit.L, 1D, 9.2D, 5);
+            var limeJuiceStock = new StorageEntity(10L, "Yuzu Syrup", 6.7D, 12,CategoryUnit.L, 1D, 9.2D, 5);
+            var campariStock = new StorageEntity(12L, "Campari", 11D, 12,CategoryUnit.L, 1D, 11.2D, 6);
+            var vermouthStock = new StorageEntity(13L, "Vermouth", 9.2D, 12,CategoryUnit.L, 1D, 9.2D, 6);
 
             storageRepository.saveAll(
                     List.of(
-                            belvederStock, greyGooseStock, makersMakerStock, bombayStock
+                            belvederStock, greyGooseStock, makersMakerStock, bombayStock,
+                            simpleSyrupStock, cranberryJuiceStock, pomegranateSyrupStock, elderflowerSyrupStock,
+                            sparklingWaterStock, yuzuSyrupStock, basilSyrupStock, limeJuiceStock, campariStock, vermouthStock
                     )
             );
-
-
 
             var iconDessert = new IconsEntity(5L, "cake", "Cake");
             var iconLocalBar = new IconsEntity(8L, "local_bar", "Local Bar");
@@ -98,8 +112,6 @@ public class Runner {
                     )
             );
 
-
-
             categoryRepository.saveAll(
                     List.of(
                             new ProductCategoryEntity(1L, "Drink", 0.5, CategoryUnit.ML.name(), "#86d3a0", iconLocalBar),
@@ -117,44 +129,65 @@ public class Runner {
 
             var categoryDrink = categoryRepository.findById(1L).orElseThrow();
             var categoryCocktail = categoryRepository.findById(2L).orElseThrow();
-            var categoryStarter = categoryRepository.findById(1L).orElseThrow();
-            var categoryLunch = categoryRepository.findById(6L).orElseThrow();
 
-            productRepository.saveAll(
+            productsStockRepository.saveAll(
                     List.of(
-                            new ProductEntity(1L, "Pomegranate Lemonade", 4.2D, categoryDrink),
-                            new ProductEntity(2L, "Elderflower Lemonade", 4.2D, categoryDrink),
-                            new ProductEntity(3L, "Cosmopolitan", 13.0D, categoryCocktail),
-                            new ProductEntity(4L, "Espresso Martini", 13.0D, categoryCocktail),
-                            new ProductEntity(5L, "Old fashioned", 11.0D, categoryCocktail),
-                            new ProductEntity(6L, "Greek Salad", 6.2D, categoryStarter),
-                            new ProductEntity(7L, "Soup", 5.6D, categoryStarter),
-                            new ProductEntity(8L, "Ramen", 12.5D, categoryLunch),
-                            new ProductEntity(9L, "Rib Eye", 17.0D, categoryLunch),
-                            new ProductEntity(10L, "Penne", 10.4D, categoryLunch),
-                            new ProductEntity(11L, "Yuzu Lemonade", 4.2D, categoryDrink),
-                            new ProductEntity(12L, "Basil Lemonade", 4.2D, categoryDrink),
-                            new ProductEntity(13L, "Mai Tai", 13.0D, categoryCocktail),
-                            new ProductEntity(14L, "Martini", 13.0D, categoryCocktail),
-                            new ProductEntity(15L, "Negroni", 11.0D, categoryCocktail),
-                            new ProductEntity(16L, "FranceSalad", 6.2D, categoryStarter),
-                            new ProductEntity(17L, "Tomato Soup", 5.6D, categoryStarter),
-                            new ProductEntity(18L, "Udon", 12.5D, categoryLunch),
-                            new ProductEntity(19L, "Chicken", 17.0D, categoryLunch),
-                            new ProductEntity(20L, "Spaghetti", 10.4D, categoryLunch)
+                            new ProductsStockEntity(1L, UnitConverter.Unit.CL, 5D, makersMakerStock),
+                            new ProductsStockEntity(2L, UnitConverter.Unit.CL, 1.5D, simpleSyrupStock),
+                            new ProductsStockEntity(3L, UnitConverter.Unit.CL, 5D, pomegranateSyrupStock),
+                            new ProductsStockEntity(4L, UnitConverter.Unit.ML, 3D, sparklingWaterStock),
+                            new ProductsStockEntity(5L, UnitConverter.Unit.CL, 5D, elderflowerSyrupStock),
+                            new ProductsStockEntity(6L, UnitConverter.Unit.ML, 3D, sparklingWaterStock),
+                            new ProductsStockEntity(7L, UnitConverter.Unit.CL, 5D, yuzuSyrupStock),
+                            new ProductsStockEntity(8L, UnitConverter.Unit.ML, 3D, sparklingWaterStock),
+                            new ProductsStockEntity(9L, UnitConverter.Unit.CL, 5D, basilSyrupStock),
+                            new ProductsStockEntity(10L, UnitConverter.Unit.ML, 3D, sparklingWaterStock),
+                            new ProductsStockEntity(11L, UnitConverter.Unit.CL, 5D, belvederStock),
+                            new ProductsStockEntity(12L, UnitConverter.Unit.CL, 3D, cranberryJuiceStock),
+                            new ProductsStockEntity(13L, UnitConverter.Unit.CL, 1D, limeJuiceStock),
+                            new ProductsStockEntity(14L, UnitConverter.Unit.CL, 1D, simpleSyrupStock),
+                            new ProductsStockEntity(15L, UnitConverter.Unit.CL, 3D, bombayStock),
+                            new ProductsStockEntity(16L, UnitConverter.Unit.CL, 3D, campariStock),
+                            new ProductsStockEntity(17L, UnitConverter.Unit.CL, 3D, vermouthStock)
                     )
             );
 
-            var tableOne = List.of(
-                    new ProductEntity(13L, "Mai Tai", 13.0D, categoryCocktail),
-                    new ProductEntity(14L, "Martini", 13.0D, categoryCocktail),
-                    new ProductEntity(15L, "Negroni", 11.0D, categoryCocktail)
-            );
+            var makerStockOne = productsStockRepository.findById(1L).orElseThrow();
+            var makerStockTwo = productsStockRepository.findById(2L).orElseThrow();
+            var pomegranateOne = productsStockRepository.findById(3L).orElseThrow();
+            var pomegranateTwo = productsStockRepository.findById(4L).orElseThrow();
+            var elderOne = productsStockRepository.findById(5L).orElseThrow();
+            var elderTwo = productsStockRepository.findById(6L).orElseThrow();
+            var yuzuOne = productsStockRepository.findById(7L).orElseThrow();
+            var yuzuTwo = productsStockRepository.findById(8L).orElseThrow();
+            var basilOne = productsStockRepository.findById(9L).orElseThrow();
+            var basilTwo = productsStockRepository.findById(10L).orElseThrow();
+            var cosmoOne = productsStockRepository.findById(11L).orElseThrow();
+            var cosmoTwo = productsStockRepository.findById(12L).orElseThrow();
+            var cosmoThree = productsStockRepository.findById(13L).orElseThrow();
+            var cosmoFour = productsStockRepository.findById(14L).orElseThrow();
+            var negroniOne = productsStockRepository.findById(15L).orElseThrow();
+            var negroniTwo = productsStockRepository.findById(16L).orElseThrow();
+            var negroniThree = productsStockRepository.findById(17L).orElseThrow();
 
-            var tableTwo = List.of(
-                    new ProductEntity(13L, "Mai Tai", 13.0D, categoryCocktail),
-                    new ProductEntity(14L, "Martini", 13.0D, categoryCocktail),
-                    new ProductEntity(15L, "Negroni", 11.0D, categoryCocktail)
+            var oldFashioned = List.of(makerStockOne, makerStockTwo);
+            var pomegranateLemonade = List.of(pomegranateOne, pomegranateTwo);
+            var elderflowerLemonade = List.of(elderOne, elderTwo);
+            var yuzuLemonade = List.of(yuzuOne, yuzuTwo);
+            var basilLemonade = List.of(basilOne, basilTwo);
+            var cosmo = List.of(cosmoOne, cosmoTwo, cosmoThree, cosmoFour);
+            var negroni = List.of(negroniOne, negroniTwo, negroniThree);
+
+            productRepository.saveAll(
+                    List.of(
+                            new ProductEntity(1L, "Pomegranate Lemonade", 4.2D, categoryDrink, pomegranateLemonade),
+                            new ProductEntity(2L, "Elderflower Lemonade", 4.2D, categoryDrink, elderflowerLemonade),
+                            new ProductEntity(3L, "Cosmopolitan", 13.0D, categoryCocktail, cosmo),
+                            new ProductEntity(5L, "Old fashioned", 11.0D, categoryCocktail, oldFashioned),
+                            new ProductEntity(11L, "Yuzu Lemonade", 4.2D, categoryDrink, yuzuLemonade),
+                            new ProductEntity(12L, "Basil Lemonade", 4.2D, categoryDrink, basilLemonade),
+                            new ProductEntity(15L, "Negroni", 11.0D, categoryCocktail, negroni)
+                    )
             );
 
             tableRepository.saveAll(
@@ -162,9 +195,9 @@ public class Runner {
                             new TableEntity(1L, 100, 0.0D, 4, false,null, null, 100, 230, List.of()),
                             new TableEntity(2L, 110, 0.0D, 2, false,null, null, 46, 175, List.of()),
                             new TableEntity(3L, 120, 0.0D, 4, false,null, null, -10, 120, List.of()),
-                            new TableEntity(4L, 210, 0.0D, 6, true,null, null, 65, 188, tableOne),
+                            new TableEntity(4L, 210, 0.0D, 6, false,null, null, 65, 188, List.of()),
                             new TableEntity(5L, 220, 0.0D, 4, false,null, null, 81, 187, List.of()),
-                            new TableEntity(6L, 300, 0.0D, 8, true, null, null, 190, 204, tableTwo),
+                            new TableEntity(6L, 300, 0.0D, 8, false, null, null, 190, 204, List.of()),
                             new TableEntity(7L, 310, 0.0D, 6, false, null, null, 212, 204, List.of()),
                             new TableEntity(8L, 420, 0.0D, 4, false, null, null, -55, 382, List.of()),
                             new TableEntity(9L, 400, 0.0D, 8, false, null, null, -206, 382, List.of())
@@ -177,6 +210,7 @@ public class Runner {
             log.info(categoryRepository.findAll().toString());
             log.info(iconsRepository.findAll().toString());
             log.info(storageRepository.findAll().toString());
+            log.info(productsStockRepository.findAll().toString());
         };
     }
 }

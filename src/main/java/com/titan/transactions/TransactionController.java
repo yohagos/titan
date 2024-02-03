@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @CrossOrigin
 @RestController
@@ -49,7 +50,7 @@ public class TransactionController {
     public ResponseEntity<TransactionEntity> updateTransaction(
             @PathVariable(name = "id") Long id,
             @RequestBody List<ProductEntity> products
-    ) {
+    ) throws InterruptedException, ExecutionException {
         return ResponseEntity.ok(transactionService.addProductsToTransaction(id, products));
     }
 
