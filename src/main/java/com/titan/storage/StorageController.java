@@ -35,4 +35,12 @@ public class StorageController {
     ) {
         return ResponseEntity.ok(storageService.updateInventory(id, request));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<StorageEntity> deleteInventory(
+            @PathVariable(name = "id") Long id
+    ) {
+        return ResponseEntity.ok(storageService.deleteInventoryById(id));
+    }
+
 }

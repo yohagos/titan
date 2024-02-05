@@ -70,4 +70,10 @@ public class StorageService {
 
         return storageRepository.save(inventory);
     }
+
+    public StorageEntity deleteInventoryById(Long id) {
+        var inventory = storageRepository.findById(id).orElseThrow();
+        storageRepository.deleteById(id);
+        return inventory;
+    }
 }
