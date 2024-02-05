@@ -49,7 +49,7 @@ public class ProductService {
                 ).ifPresent(product::setName);
         Optional.ofNullable(request.getPrice())
                 .filter(
-                        price -> !price.isNaN() || price != product.getPrice()
+                        price -> !price.isNaN() || !price.equals(product.getPrice())
                 ).ifPresent(product::setPrice);
         Optional.of(category)
                 .filter(

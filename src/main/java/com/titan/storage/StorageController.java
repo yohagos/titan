@@ -1,6 +1,7 @@
 package com.titan.storage;
 
 import com.titan.storage.requests.StorageAddRequest;
+import com.titan.storage.requests.StorageEditRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,5 +26,13 @@ public class StorageController {
             @RequestBody StorageAddRequest request
     ) {
         return ResponseEntity.ok(storageService.addProductToStorage(request));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<StorageEntity> editInventory(
+            @PathVariable(name = "id") Long id,
+            @RequestBody StorageEditRequest request
+    ) {
+        return ResponseEntity.ok(storageService.updateInventory(id, request));
     }
 }
