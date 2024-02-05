@@ -68,20 +68,20 @@ public class Runner {
                     )
             );
 
-            var belvederStock = new StorageEntity(1L, "Belveder", 22.75D, 20, CategoryUnit.L, 1D, 17D, 5);
-            var greyGooseStock = new StorageEntity(2L, "Grey Goose", 19.99D, 30,CategoryUnit.L, 1D, 22D, 10);
-            var makersMakerStock = new StorageEntity(3L, "Maker's Maker", 27.75D, 20,CategoryUnit.L, 1D, 19.5D, 7);
-            var bombayStock = new StorageEntity(4L, "Bombay Dry Gin", 16.5D, 30,CategoryUnit.L, 1D, 26.2D, 10);
-            var simpleSyrupStock = new StorageEntity(5L, "Simple Sirup", 7D, 10,CategoryUnit.L, 1D, 8.9D, 3);
-            var cranberryJuiceStock = new StorageEntity(6L, "Cranberry Juice", 4.99D, 10,CategoryUnit.L, 1D, 7.5D, 5);
-            var pomegranateSyrupStock = new StorageEntity(7L, "Pomegranate Syrup", 6.70D, 12,CategoryUnit.L, 1D, 8.5D, 4);
-            var elderflowerSyrupStock = new StorageEntity(8L, "Elderflower Syrup", 6.7D, 12,CategoryUnit.L, 1D, 9.2D, 5);
-            var sparklingWaterStock = new StorageEntity(9L, "Sparkling Water", 4.4D, 30,CategoryUnit.L, 1D, 22D, 10);
-            var yuzuSyrupStock = new StorageEntity(10L, "Yuzu Syrup", 6.7D, 12,CategoryUnit.L, 1D, 9.2D, 5);
-            var basilSyrupStock = new StorageEntity(11L, "Basil Water", 6.7D, 12,CategoryUnit.L, 1D, 9.2D, 5);
-            var limeJuiceStock = new StorageEntity(10L, "Yuzu Syrup", 6.7D, 12,CategoryUnit.L, 1D, 9.2D, 5);
-            var campariStock = new StorageEntity(12L, "Campari", 11D, 12,CategoryUnit.L, 1D, 11.2D, 6);
-            var vermouthStock = new StorageEntity(13L, "Vermouth", 9.2D, 12,CategoryUnit.L, 1D, 9.2D, 6);
+            var belvederStock = new StorageEntity(1L, "Belveder", 22.75D, 20, UnitConverter.Unit.L, 1D, 17D, 5);
+            var greyGooseStock = new StorageEntity(2L, "Grey Goose", 19.99D, 30,UnitConverter.Unit.L, 1D, 22D, 10);
+            var makersMakerStock = new StorageEntity(3L, "Maker's Maker", 27.75D, 20,UnitConverter.Unit.L, 1D, 19.5D, 7);
+            var bombayStock = new StorageEntity(4L, "Bombay Dry Gin", 16.5D, 30,UnitConverter.Unit.L, 1D, 26.2D, 10);
+            var simpleSyrupStock = new StorageEntity(5L, "Simple Sirup", 7D, 10,UnitConverter.Unit.L, 1D, 8.9D, 3);
+            var cranberryJuiceStock = new StorageEntity(6L, "Cranberry Juice", 4.99D, 10,UnitConverter.Unit.L, 1D, 7.5D, 5);
+            var pomegranateSyrupStock = new StorageEntity(7L, "Pomegranate Syrup", 6.70D, 12,UnitConverter.Unit.L, 1D, 8.5D, 4);
+            var elderflowerSyrupStock = new StorageEntity(8L, "Elderflower Syrup", 6.7D, 12,UnitConverter.Unit.L, 1D, 9.2D, 5);
+            var sparklingWaterStock = new StorageEntity(9L, "Sparkling Water", 4.4D, 30,UnitConverter.Unit.L, 1D, 22D, 10);
+            var yuzuSyrupStock = new StorageEntity(10L, "Yuzu Syrup", 6.7D, 12,UnitConverter.Unit.L, 1D, 9.2D, 5);
+            var basilSyrupStock = new StorageEntity(11L, "Basil Water", 6.7D, 12,UnitConverter.Unit.L, 1D, 9.2D, 5);
+            var limeJuiceStock = new StorageEntity(10L, "Yuzu Syrup", 6.7D, 12,UnitConverter.Unit.L, 1D, 9.2D, 5);
+            var campariStock = new StorageEntity(12L, "Campari", 11D, 12,UnitConverter.Unit.L, 1D, 11.2D, 6);
+            var vermouthStock = new StorageEntity(13L, "Vermouth", 9.2D, 12,UnitConverter.Unit.L, 1D, 9.2D, 6);
 
             storageRepository.saveAll(
                     List.of(
