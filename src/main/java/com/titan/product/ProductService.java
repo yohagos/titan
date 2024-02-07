@@ -82,7 +82,6 @@ public class ProductService {
         List<ProductsStockEntity> stocks = new ArrayList<>();
         for (var stock: list) {
             var data = storageRepository.findByName(stock.getGood()).orElseThrow();
-            log.warn(data.toString());
             var store = new ProductsStockEntity(
                     UnitConverter.Unit.valueOf(stock.getUnit()),
                     stock.getMeasurement(),
@@ -91,7 +90,6 @@ public class ProductService {
             var productStock = productsStockRepository.save(store);
             stocks.add(productStock);
         }
-        log.warn(stocks.toString());
         product.setComponents(stocks);
     }
 }
