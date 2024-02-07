@@ -4,11 +4,17 @@ import com.titan.product.category.ProductCategoryRepository;
 import com.titan.product.request.ProductAddRequest;
 import com.titan.product.response.ProductResponse;
 import com.titan.product.request.ProductUpdateRequest;
+import com.titan.product.stock.ProductsStockEntity;
+import com.titan.product.stock.ProductsStockRepository;
+import com.titan.product.stock.UnitConverter;
+import com.titan.product.stock.request.ProductStockAddRequest;
+import com.titan.storage.StorageRepository;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +24,8 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductCategoryRepository categoryRepository;
+    private final ProductsStockRepository productsStockRepository;
+    private final StorageRepository storageRepository;
 
     private static final Logger log = LoggerFactory.getLogger(ProductService.class);
 
@@ -67,5 +75,23 @@ public class ProductService {
     public void deleteProductById(Long id) {
         var product = productRepository.findById(id).orElseThrow();
         productRepository.deleteById(product.getId());
+    }
+
+    public void addComponentsToProduct(Long id, List<ProductStockAddRequest> list) {
+        var product = productRepository.findById(id).orElseThrow();
+        List<ProductsStockEntity> stocks = new ArrayList<>();
+        for (var stock: list) {
+            var data = storageRepository.findByName(stock.getGood()).orElseThrow();
+            log.warn(data.toString());
+            var store = new ProductsStockEntity(
+                    UnitConverter.Unit.valueOf(stock.getUnit()),
+                    stock.getMeasurement(),
+                    data
+            );
+            var productStock = productsStockRepository.save(store);
+            stocks.add(productStock);
+        }
+        log.warn(stocks.toString());
+        product.setComponents(stocks);
     }
 }
