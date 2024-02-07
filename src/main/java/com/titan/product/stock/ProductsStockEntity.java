@@ -26,6 +26,9 @@ public class ProductsStockEntity implements Serializable {
     private Double measurement;
     private StorageEntity good;
 
+    public ProductsStockEntity(UnitConverter.Unit unit, Double measurement, StorageEntity data) {
+    }
+
 
     @Override
     public String toString() {
