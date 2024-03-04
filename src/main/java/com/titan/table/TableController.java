@@ -25,6 +25,7 @@ public class TableController {
 
     @GetMapping
     public ResponseEntity<List<TableEntity>> getTables() {
+        log.info(tableService.getTableList().toString());
         return ResponseEntity.ok(tableService.getTableList());
     }
 
@@ -32,7 +33,6 @@ public class TableController {
     public ResponseEntity<List<ProductEntity>> getProductsForTable(
             @PathVariable(name = "tableId") Long id
     ) {
-        log.info(id.toString());
         return ResponseEntity.ok(tableService.getProductsByTableId(id));
     }
 
@@ -40,7 +40,6 @@ public class TableController {
     public ResponseEntity updateTables(
             @RequestBody List<TableEntity> tables
     ) {
-        log.info(tables.toString());
         tableService.updateTablesPositions(tables);
         return ResponseEntity.ok().build();
     }

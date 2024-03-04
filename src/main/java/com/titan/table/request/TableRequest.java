@@ -15,6 +15,6 @@ public class TableRequest {
 
     private Integer tableNumber;
     private Integer numberOfPeople;
-    private Integer positionX;
-    private Integer positionY;
+    private Double positionX;
+    private Double positionY;
 }
