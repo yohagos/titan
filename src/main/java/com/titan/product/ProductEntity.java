@@ -3,7 +3,6 @@ package com.titan.product;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.titan.product.category.ProductCategoryEntity;
 import com.titan.product.stock.ProductsStockEntity;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
