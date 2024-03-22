@@ -17,10 +17,9 @@ public class SettingService {
     private static final Logger log = LoggerFactory.getLogger(SettingService.class);
 
     public List<SettingEntity> getSettings() {
+        var sets = settingRepository.findAll();
         return settingRepository.findAll();
     }
-
-
 
     public SettingEntity editSettings(EditSettingsRequest request) {
         var findSetting = settingRepository.findById(1L);

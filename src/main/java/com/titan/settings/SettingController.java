@@ -24,7 +24,7 @@ public class SettingController {
         return ResponseEntity.ok(settingService.getSettings());
     }
 
-    @GetMapping("/edit")
+    @PutMapping("/edit")
     public ResponseEntity<SettingEntity> editSettings(
             @RequestBody EditSettingsRequest request
     ) {
