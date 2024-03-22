@@ -10,6 +10,7 @@ import com.titan.product.category.icons.IconsRepository;
 import com.titan.product.stock.ProductsStockEntity;
 import com.titan.product.stock.ProductsStockRepository;
 import com.titan.product.stock.UnitConverter;
+import com.titan.settings.SettingRepository;
 import com.titan.storage.StorageEntity;
 import com.titan.storage.StorageRepository;
 import com.titan.table.TableEntity;
@@ -44,7 +45,8 @@ public class Runner {
             ProductCategoryRepository categoryRepository,
             IconsRepository iconsRepository,
             StorageRepository storageRepository,
-            ProductsStockRepository productsStockRepository
+            ProductsStockRepository productsStockRepository,
+            SettingRepository settingRepository
     ) {
         return args -> {
             userRepository.saveAll(
@@ -211,6 +213,7 @@ public class Runner {
             log.info(iconsRepository.findAll().toString());
             log.info(storageRepository.findAll().toString());
             log.info(productsStockRepository.findAll().toString());
+            log.info(settingRepository.findAll().toString());
         };
     }
 }

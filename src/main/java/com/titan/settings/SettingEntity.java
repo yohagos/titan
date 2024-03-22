@@ -1,16 +1,14 @@
 package com.titan.settings;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.Map;
 
 @Data
 @Builder
@@ -24,6 +22,18 @@ public class SettingEntity implements Serializable {
     @GeneratedValue
     private Long id;
 
+    private String companyName;
+    private String streetName;
+    private String streetNumber;
+    private String postalCode;
+    private String cityName;
 
-    /*private Map<String, String> settings;*/
+    private Integer timerLockScreen;
+
+    @Override
+    public String toString() {
+        return String.format("SettingEntity=[id=%d, companyName=%s, streetName=%s, streetNumber=%s, postalCode=%s, cityName=%s, timerLockScreen=%d]",
+                getId(), getCompanyName(), getStreetName(), getStreetNumber(), getPostalCode(), getCityName(), getTimerLockScreen());
+    }
+
 }
