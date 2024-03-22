@@ -17,18 +17,16 @@ public class SettingService {
     private static final Logger log = LoggerFactory.getLogger(SettingService.class);
 
     public List<SettingEntity> getSettings() {
-        var sets = settingRepository.findAll();
         return settingRepository.findAll();
     }
 
     public SettingEntity editSettings(EditSettingsRequest request) {
         var findSetting = settingRepository.findById(1L);
-        var setting = findSetting.isPresent() ? editSetting(findSetting.get(), request) : addSettings(request);
-        return setting;
+        return findSetting.map(setting -> editSetting(setting, request)).orElseGet(() -> addSettings(request));
     }
 
     private SettingEntity addSettings(EditSettingsRequest request) {
-        var createdSettings = settingRepository.save(
+        return settingRepository.save(
                 new SettingEntity(
                         1L,
                         request.getCompanyName(),
@@ -36,14 +34,9 @@ public class SettingService {
                         request.getStreetNumber(),
                         request.getPostalCode(),
                         request.getCityName(),
-                        request.getCustomColorTheme(),
-                        request.getPrimaryColor(),
-                        request.getAccentColor(),
-                        request.getWarnColor(),
                         request.getTimerLockScreen()
                 )
         );
-        return createdSettings;
     }
 
     private SettingEntity editSetting(SettingEntity setting,EditSettingsRequest request) {
@@ -68,22 +61,6 @@ public class SettingService {
                         number -> !number.isEmpty() || !number.contentEquals(setting.getStreetNumber())
                 ).ifPresent(setting::setStreetNumber);
 
-        Optional.of(request.getCustomColorTheme())
-                .filter(
-                        theme -> !theme.equals(setting.getCustomColorTheme())
-                ).ifPresent(setting::setCustomColorTheme);
-        Optional.of(request.getPrimaryColor())
-                .filter(
-                        prim -> !prim.isEmpty() || !prim.contentEquals(setting.getPrimaryColor())
-                ).ifPresent(setting::setPrimaryColor);
-        Optional.ofNullable(request.getAccentColor())
-                .filter(
-                        acc -> !acc.isEmpty() || !acc.contentEquals(setting.getAccentColor())
-                ).ifPresent(setting::setAccentColor);
-        Optional.ofNullable(request.getWarnColor())
-                .filter(
-                        warn -> !warn.isEmpty() || !warn.contentEquals(setting.getWarnColor())
-                ).ifPresent(setting::setWarnColor);
         Optional.ofNullable(request.getTimerLockScreen())
                 .filter(
                         timer -> timer > 0 || !timer.equals(setting.getTimerLockScreen())

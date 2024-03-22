@@ -29,11 +29,6 @@ public class SettingEntity implements Serializable {
     private String postalCode;
     private String cityName;
 
-    private Boolean customColorTheme;
-    private String primaryColor;
-    private String accentColor;
-    private String warnColor;
-
     private Integer timerLockScreen;
 
     @Override
