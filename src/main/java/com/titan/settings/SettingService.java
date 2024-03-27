@@ -34,7 +34,11 @@ public class SettingService {
                         request.getStreetNumber(),
                         request.getPostalCode(),
                         request.getCityName(),
-                        request.getTimerLockScreen()
+                        request.getTimerLockScreen(),
+                        request.getCashContent(),
+                        request.getCardReader(),
+                        request.getTaxesToGo(),
+                        request.getTaxesIn()
                 )
         );
     }
@@ -65,6 +69,26 @@ public class SettingService {
                 .filter(
                         timer -> timer > 0 || !timer.equals(setting.getTimerLockScreen())
                 ).ifPresent(setting::setTimerLockScreen);
+
+        Optional.ofNullable(request.getCashContent())
+                .filter(
+                        cash -> !cash.equals(setting.getCashContent())
+                ).ifPresent(setting::setCashContent);
+
+        Optional.ofNullable(request.getCardReader())
+                .filter(
+                        name -> !name.isEmpty() || !name.contentEquals(setting.getCardReader())
+                ).ifPresent(setting::setCardReader);
+
+        Optional.ofNullable(request.getTaxesToGo())
+                .filter(
+                        togo -> togo > 0 && !togo.equals(setting.getTaxesToGo())
+                ).ifPresent(setting::setTaxesToGo);
+
+        Optional.ofNullable(request.getTaxesIn())
+                .filter(
+                        taxes -> taxes > 0 && !taxes.equals(setting.getTaxesIn())
+                ).ifPresent(setting::setTaxesIn);
 
         settingRepository.save(setting);
         return setting;
