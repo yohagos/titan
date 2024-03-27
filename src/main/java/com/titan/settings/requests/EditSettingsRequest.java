@@ -18,4 +18,10 @@ public class EditSettingsRequest {
     private String cityName;
 
     private Integer timerLockScreen;
+
+    private Double cashContent;
+    private String cardReader;
+
+    private Integer taxesToGo;
+    private Integer taxesIn;
 }

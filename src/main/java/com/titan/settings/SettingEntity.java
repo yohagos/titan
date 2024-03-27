@@ -30,10 +30,16 @@ public class SettingEntity implements Serializable {
 
     private Integer timerLockScreen;
 
+    private Double cashContent;
+    private String cardReader;
+
+    private Integer taxesToGo;
+    private Integer taxesIn;
+
     @Override
     public String toString() {
-        return String.format("SettingEntity=[id=%d, companyName=%s, streetName=%s, streetNumber=%s, postalCode=%s, cityName=%s, timerLockScreen=%d]",
-                getId(), getCompanyName(), getStreetName(), getStreetNumber(), getPostalCode(), getCityName(), getTimerLockScreen());
+        return String.format("SettingEntity=[id=%d, companyName=%s, streetName=%s, streetNumber=%s, postalCode=%s, cityName=%s, timerLockScreen=%d, cashContent=%s, cardReader=%s, taxesToGo=%d, taxesIn=%d]",
+                getId(), getCompanyName(), getStreetName(), getStreetNumber(), getPostalCode(), getCityName(), getTimerLockScreen(), getCashContent(), getCardReader(), getTaxesToGo(), getTaxesIn());
     }
 
 }
