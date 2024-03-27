@@ -192,15 +192,9 @@ public class Runner {
 
             tableRepository.saveAll(
                     List.of(
-                            /*new TableEntity(1L, 100, 0.0D, 4, false,null, null, tile1, List.of()),
-                            new TableEntity(2L, 110, 0.0D, 2, false,null, null, tile2, List.of()),
-                            new TableEntity(3L, 120, 0.0D, 4, false,null, null, tile3, List.of())*/
-                            new TableEntity(4L, 210, 0.0D, 6, false,null, null, 50D, 112D, List.of()),
-                            new TableEntity(5L, 220, 0.0D, 4, false,null, null, 50D, 170D, List.of()),
-                            new TableEntity(6L, 300, 0.0D, 8, false, null, null, 100D, 116D, List.of()),
-                            new TableEntity(7L, 310, 0.0D, 6, false, null, null, 150D, 116D, List.of()),
-                            new TableEntity(8L, 420, 0.0D, 4, false, null, null, 200D, 112D, List.of()),
-                            new TableEntity(9L, 400, 0.0D, 8, false, null, null, 200D, 172D, List.of())
+                            new TableEntity(1L, 100, 0.0D, 4, false,null, null, 50, 100, List.of()),
+                            new TableEntity(2L, 110, 0.0D, 2, false,null, null, 100, 50, List.of()),
+                            new TableEntity(3L, 120, 0.0D, 4, false,null, null, 100, 100, List.of())
                     )
             );
 
