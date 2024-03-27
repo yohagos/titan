@@ -114,8 +114,13 @@ public class TableService {
     }
 
     public List<ProductEntity> getProductsByTableId(Long id) {
+        var checkContent = tableRepository.findAll();
+        for (var content: checkContent) {
+            log.warn(content.toString());
+        }
+
         var products = tableRepository.findById(id).orElseThrow();
-        log.info(products.toString());
+        log.info(products.getProducts().toString());
         return products.getProducts();
     }
 

@@ -10,6 +10,7 @@ import com.titan.product.category.icons.IconsRepository;
 import com.titan.product.stock.ProductsStockEntity;
 import com.titan.product.stock.ProductsStockRepository;
 import com.titan.product.stock.UnitConverter;
+import com.titan.settings.SettingRepository;
 import com.titan.storage.StorageEntity;
 import com.titan.storage.StorageRepository;
 import com.titan.table.TableEntity;
@@ -44,7 +45,8 @@ public class Runner {
             ProductCategoryRepository categoryRepository,
             IconsRepository iconsRepository,
             StorageRepository storageRepository,
-            ProductsStockRepository productsStockRepository
+            ProductsStockRepository productsStockRepository,
+            SettingRepository settingRepository
     ) {
         return args -> {
             userRepository.saveAll(
@@ -59,11 +61,11 @@ public class Runner {
                             ),
                             new UserEntity(
                                     3L, "Benni","Elaine", "benni@elaine.com",
-                                    passwordEncoder.encode("elaine"), 4321, LocalDateTime.now(), UserRole.ADMIN
+                                    passwordEncoder.encode("elaine"), 4321, LocalDateTime.now(), UserRole.USER
                             ),
                             new UserEntity(
                                     4L, "Yosef","Hagos", "yosef@hagos.com",
-                                    passwordEncoder.encode("hagos"), 4321, LocalDateTime.now(), UserRole.ADMIN
+                                    passwordEncoder.encode("hagos"), 1111, LocalDateTime.now(), UserRole.ADMIN
                             )
                     )
             );
@@ -192,15 +194,9 @@ public class Runner {
 
             tableRepository.saveAll(
                     List.of(
-                            new TableEntity(1L, 100, 0.0D, 4, false,null, null, 100, 230, List.of()),
-                            new TableEntity(2L, 110, 0.0D, 2, false,null, null, 46, 175, List.of()),
-                            new TableEntity(3L, 120, 0.0D, 4, false,null, null, -10, 120, List.of()),
-                            new TableEntity(4L, 210, 0.0D, 6, false,null, null, 65, 188, List.of()),
-                            new TableEntity(5L, 220, 0.0D, 4, false,null, null, 81, 187, List.of()),
-                            new TableEntity(6L, 300, 0.0D, 8, false, null, null, 190, 204, List.of()),
-                            new TableEntity(7L, 310, 0.0D, 6, false, null, null, 212, 204, List.of()),
-                            new TableEntity(8L, 420, 0.0D, 4, false, null, null, -55, 382, List.of()),
-                            new TableEntity(9L, 400, 0.0D, 8, false, null, null, -206, 382, List.of())
+                            new TableEntity(1L, 100, 0.0D, 4, false,null, null, 50, 100, List.of()),
+                            new TableEntity(2L, 110, 0.0D, 2, false,null, null, 100, 50, List.of()),
+                            new TableEntity(3L, 120, 0.0D, 4, false,null, null, 100, 100, List.of())
                     )
             );
 
@@ -211,6 +207,7 @@ public class Runner {
             log.info(iconsRepository.findAll().toString());
             log.info(storageRepository.findAll().toString());
             log.info(productsStockRepository.findAll().toString());
+            log.info(settingRepository.findAll().toString());
         };
     }
 }
